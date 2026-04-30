@@ -1,0 +1,2 @@
+.hero { padding: 3.8rem 0 2.4rem; }
+@media (max-width: 760px) { .hero { padding-top: 2.3rem; } }
