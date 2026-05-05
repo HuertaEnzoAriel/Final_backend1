@@ -81,11 +81,11 @@ class BlogController extends Controller
             'title' => $validated['title'],
             'content' => $validated['content'],
             'image_path' => $imagePath,
-            'is_published' => true,
-            'published_at' => now(),
+            'is_published' => false, // Cambiamos esto a false
+            'published_at' => null,  // Cambiamos esto a null
         ]);
 
-        return redirect()->route('posts.show', $post)->with('status', 'Post publicado con tu usuario.');
+        return redirect()->route('dashboard')->with('status', 'Post enviado a revisión. Un administrador lo publicará pronto.');
     }
 
     public function update(Request $request, Post $post): RedirectResponse
