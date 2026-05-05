@@ -111,34 +111,29 @@
                 </article>
 
                 <aside class="sidebar">
-                    <section class="panel fade-up delay-1">
-                        <h3>Publicar comentario</h3>
-                        <form method="POST" action="{{ route('posts.comments.store', $selectedPost) }}" class="form-grid">
-                            @csrf
-                            @if ($currentUser)
-                                <div class="empty-state">Comentando como {{ $currentUser->name }}.</div>
-                            @else
-                                <div class="form-group">
-                                    <label class="label" for="user_id_comment">Escribe como</label>
-                                    <select id="user_id_comment" name="user_id" class="form-select" required>
-                                        <option value="">Selecciona un usuario</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_id') <small class="helper">{{ $message }}</small> @enderror
-                                </div>
-                            @endif
-                            <div class="form-group">
-                                <label class="label" for="content">Comentario</label>
-                                <textarea id="content" name="content" rows="4" class="form-textarea" required>{{ old('content') }}</textarea>
-                                @error('content') <small class="helper">{{ $message }}</small> @enderror
-                            </div>
-                            <button class="action-btn" type="submit">Enviar comentario</button>
-                        </form>
-                    </section>
+            <section class="panel fade-up delay-1">
+                <h3>Publicar comentario</h3>
 
-                    <section class="panel fade-up delay-2">
+                @if ($currentUser)
+                    <form method="POST" action="{{ route('posts.comments.store', $selectedPost) }}" class="form-grid">
+                        @csrf
+                        <div class="empty-state">Comentando como {{ $currentUser->name }}.</div>
+
+                        <div class="form-group">
+                            <label class="label" for="content">Comentario</label>
+                            <textarea id="content" name="content" rows="4" class="form-textarea" required>{{ old('content') }}</textarea>
+                            @error('content') <small class="helper">{{ $message }}</small> @enderror
+                        </div>
+                        <button class="action-btn" type="submit">Enviar comentario</button>
+                    </form>
+                @else
+                    <div class="empty-state">
+                        <a href="{{ route('login') }}" style="color: inherit; text-decoration: underline;">Inicia sesión</a> para dejar un comentario.
+                    </div>
+                @endif
+            </section>
+
+            <section class="panel fade-up delay-2">
                         <h3>Calificar post</h3>
                         @if ($currentUserRating)
                             <div class="empty-state" style="margin-bottom:0.8rem;">
@@ -153,37 +148,33 @@
                                 </form>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('posts.ratings.store', $selectedPost) }}" class="form-grid">
-                            @csrf
-                            <div class="form-row">
-                                <div class="form-group">
-                                    @if ($currentUser)
+
+                        @if ($currentUser)
+                            <form method="POST" action="{{ route('posts.ratings.store', $selectedPost) }}" class="form-grid">
+                                @csrf
+                                <div class="form-row">
+                                    <div class="form-group">
                                         <label class="label">Usuario</label>
                                         <div class="empty-state" style="padding:0.7rem 0.75rem;">Calificando como {{ $currentUser->name }}.</div>
-                                    @else
-                                        <label class="label" for="user_id_rating">Usuario</label>
-                                        <select id="user_id_rating" name="user_id" class="form-select" required>
-                                            <option value="">Selecciona un usuario</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }}</option>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label" for="score">Puntaje</label>
+                                        <select id="score" name="score" class="form-select" required>
+                                            <option value="">Selecciona</option>
+                                            @foreach (range(1, 5) as $score)
+                                                <option value="{{ $score }}" @selected((string) old('score') === (string) $score)>{{ $score }}</option>
                                             @endforeach
                                         </select>
-                                        @error('user_id') <small class="helper">{{ $message }}</small> @enderror
-                                    @endif
+                                        @error('score') <small class="helper">{{ $message }}</small> @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="label" for="score">Puntaje</label>
-                                    <select id="score" name="score" class="form-select" required>
-                                        <option value="">Selecciona</option>
-                                        @foreach (range(1, 5) as $score)
-                                            <option value="{{ $score }}" @selected((string) old('score') === (string) $score)>{{ $score }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('score') <small class="helper">{{ $message }}</small> @enderror
-                                </div>
+                                <button class="action-btn" type="submit">Guardar rating</button>
+                            </form>
+                        @else
+                            <div class="empty-state">
+                                <a href="{{ route('login') }}" style="color: inherit; text-decoration: underline;">Inicia sesión</a> para calificar este post.
                             </div>
-                            <button class="action-btn" type="submit">Guardar rating</button>
-                        </form>
+                        @endif
                     </section>
                 </aside>
             </section>

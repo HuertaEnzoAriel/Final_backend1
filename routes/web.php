@@ -26,10 +26,10 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/comments/{comment}', [BlogController::class, 'destroyComment'])->name('comments.destroy');
 	Route::get('/ratings/{rating}/edit', [BlogController::class, 'editRating'])->name('ratings.edit');
 	Route::patch('/ratings/{rating}', [BlogController::class, 'updateRating'])->name('ratings.update');
-	Route::delete('/ratings/{rating}', [BlogController::class, 'destroyRating'])->name('ratings.destroy');
+	Route::delete('/ratings/{rating}', [BlogController::class, 'destroyRating'])->name('ratings.destroy');	
+	Route::post('/posts/{post}/comments', [BlogController::class, 'storeComment'])->name('posts.comments.store');
+	Route::post('/posts/{post}/ratings', [BlogController::class, 'storeRating'])->name('posts.ratings.store');
 });
 
 Route::get('/posts/{post}', [BlogController::class, 'show'])->name('posts.show');
 
-Route::post('/posts/{post}/comments', [BlogController::class, 'storeComment'])->name('posts.comments.store');
-Route::post('/posts/{post}/ratings', [BlogController::class, 'storeRating'])->name('posts.ratings.store');

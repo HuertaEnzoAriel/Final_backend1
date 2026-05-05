@@ -145,25 +145,13 @@ class BlogController extends Controller
     {
         abort_unless($post->is_published, 404);
 
-        $rules = [
+        $validated = $request->validate([
             'content' => ['required', 'string', 'min:8', 'max:1000'],
-        ];
-
-        if (! Auth::check()) {
-            $rules['user_id'] = ['required', 'exists:users,id'];
-        }
-
-        $validated = $request->validate($rules);
-
-        $userId = Auth::id() ?? $request->integer('user_id');
-
-        if (! $userId) {
-            abort(403);
-        }
+        ]);
 
         Comment::create([
             'post_id' => $post->id,
-            'user_id' => $userId,
+            'user_id' => Auth::id(), // Toma el ID automáticamente de la sesión
             'content' => $validated['content'],
         ]);
 
@@ -209,33 +197,21 @@ class BlogController extends Controller
     public function storeRating(Request $request, Post $post): RedirectResponse
     {
         abort_unless($post->is_published, 404);
-
-        $rules = [
+    
+        $validated = $request->validate([
             'score' => ['required', 'integer', 'between:1,5'],
-        ];
-
-        if (! Auth::check()) {
-            $rules['user_id'] = ['required', 'exists:users,id'];
-        }
-
-        $validated = $request->validate($rules);
-
-        $userId = Auth::id() ?? $request->integer('user_id');
-
-        if (! $userId) {
-            abort(403);
-        }
-
+        ]);
+    
         Rating::updateOrCreate(
             [
                 'post_id' => $post->id,
-                'user_id' => $userId,
+                'user_id' => Auth::id(), // Toma el ID automáticamente de la sesión
             ],
             [
                 'score' => $validated['score'],
             ]
         );
-
+    
         return redirect()
             ->route('posts.show', $post)
             ->with('status', 'Calificacion guardada correctamente.');
