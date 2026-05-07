@@ -17,11 +17,11 @@
                 <button class="menu-toggle" type="button" aria-label="Abrir menu" data-menu-toggle>☰</button>
                 <ul class="nav-list" data-menu-list>
                     <li><a href="{{ route('blog.index') }}">Inicio</a></li>
-                    <li><a href="#posts">Articulos</a></li>
-                    <li><a href="#community">Comunidad</a></li>
-                    <li><a href="#contact">Contacto</a></li>
                     @if ($currentUser)
                         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        @if ($currentUser->role === 'admin')
+                            <li><a href="{{ route('admin.posts.pending') }}">Moderacion</a></li>
+                        @endif
                         <li><a href="{{ route('posts.create') }}">Publicar</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">

@@ -16,6 +16,9 @@
             <div class="actions">
                 <a class="btn primary" href="{{ route('posts.create') }}">Nuevo post</a>
                 <a class="btn" href="{{ route('blog.index') }}">Ver blog</a>
+                @if ($user->role === 'admin')
+                    <a class="btn" href="{{ route('admin.posts.pending') }}">Moderacion</a>
+                @endif
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="btn" type="submit">Salir</button>

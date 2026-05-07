@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,9 @@ Route::middleware('auth')->group(function () {
 	Route::post('/posts/{post}/ratings', [BlogController::class, 'storeRating'])->name('posts.ratings.store');
 });
 
-Route::get('/posts/{post}', [BlogController::class, 'show'])->name('posts.show');
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+	Route::get('/posts/pending', [AdminPostController::class, 'index'])->name('posts.pending');
+	Route::patch('/posts/{post}/approve', [AdminPostController::class, 'approve'])->name('posts.approve');
+});
 
+Route::get('/posts/{post}', [BlogController::class, 'show'])->name('posts.show');
