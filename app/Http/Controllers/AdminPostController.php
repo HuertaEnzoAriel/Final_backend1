@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
 {
+    private const ROLES = ['admin', 'editor', 'user'];
+
     public function preview(Post $post): View
     {
         $this->assertAdmin();
@@ -33,10 +38,39 @@ class AdminPostController extends Controller
             ->latest('created_at')
             ->get();
 
+        $users = User::query()
+            ->orderBy('name')
+            ->get(['id', 'name', 'email', 'role']);
+
         return view('admin.posts.pending', [
             'posts' => $posts,
+            'users' => $users,
+            'roles' => self::ROLES,
             'user' => Auth::user(),
         ]);
+    }
+
+    public function updateUserRole(Request $request, User $user): RedirectResponse
+    {
+        $this->assertAdmin();
+
+        if (Auth::id() === $user->id) {
+            return redirect()
+                ->route('admin.posts.pending')
+                ->with('status', 'No puedes cambiar tu propio rol desde moderacion.');
+        }
+
+        $validated = $request->validate([
+            'role' => ['required', 'string', Rule::in(self::ROLES)],
+        ]);
+
+        $user->update([
+            'role' => $validated['role'],
+        ]);
+
+        return redirect()
+            ->route('admin.posts.pending')
+            ->with('status', 'Rol de usuario actualizado.');
     }
 
     public function approve(Post $post): RedirectResponse

@@ -64,6 +64,11 @@ th { font-size: 0.86rem; color: var(--muted); background: #faf5ee; }
 .ok { border-color: rgba(31, 122, 140, 0.35); background: rgba(31, 122, 140, 0.12); color: #124c57; }
 .draft { border-color: rgba(225, 106, 45, 0.35); background: rgba(225, 106, 45, 0.12); color: #8c3e12; }
 .rejected { border-color: rgba(179, 50, 50, 0.35); background: rgba(179, 50, 50, 0.12); color: #7f2020; }
+.role-form { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.role-form select { min-width: 9rem; }
+.role-admin { border-color: rgba(138, 77, 31, 0.35); background: rgba(138, 77, 31, 0.12); color: #7b4417; }
+.role-editor { border-color: rgba(31, 122, 140, 0.35); background: rgba(31, 122, 140, 0.12); color: #124c57; }
+.role-user { border-color: rgba(90, 95, 107, 0.35); background: rgba(90, 95, 107, 0.12); color: #4a515d; }
 
 @media (max-width: 900px) {
     .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }

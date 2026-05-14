@@ -75,6 +75,55 @@
                 </tbody>
             </table>
         </section>
+
+        <section class="table-wrap" style="margin-top:1rem;">
+            <div style="padding:1rem 0.9rem 0.4rem;">
+                <p class="muted" style="margin:0;">Usuarios</p>
+                <h2 style="margin:0.2rem 0 0; font-family:'Fraunces', Georgia, serif;">Cambiar rol</h2>
+                <p class="muted" style="margin:.35rem 0 0;">Administra el acceso de cada usuario directamente desde moderacion.</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol actual</th>
+                        <th>Nuevo rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($users as $managedUser)
+                        <tr>
+                            <td>{{ $managedUser->name }}</td>
+                            <td>{{ $managedUser->email }}</td>
+                            <td>
+                                <span class="status role-{{ $managedUser->role }}">{{ ucfirst($managedUser->role) }}</span>
+                            </td>
+                            <td>
+                                @if ($managedUser->id === $user->id)
+                                    <span class="muted">No disponible para tu propia cuenta.</span>
+                                @else
+                                    <form method="POST" action="{{ route('admin.users.role', $managedUser) }}" class="role-form" onsubmit="return confirm('¿Actualizar el rol de este usuario?');">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select name="role" aria-label="Nuevo rol para {{ $managedUser->name }}">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role }}" @selected($managedUser->role === $role)>{{ ucfirst($role) }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn primary" type="submit">Guardar</button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="muted">No hay usuarios para administrar.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </section>
     </main>
 </body>
 </html>
