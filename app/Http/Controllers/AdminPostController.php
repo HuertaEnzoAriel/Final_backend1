@@ -9,6 +9,20 @@ use Illuminate\View\View;
 
 class AdminPostController extends Controller
 {
+    public function preview(Post $post): View
+    {
+        $this->assertAdmin();
+
+        if ((int) $post->is_published !== Post::STATUS_DRAFT) {
+            abort(404);
+        }
+
+        return view('admin.posts.preview', [
+            'post' => $post->load('user:id,name'),
+            'user' => Auth::user(),
+        ]);
+    }
+
     public function index(): View
     {
         $this->assertAdmin();

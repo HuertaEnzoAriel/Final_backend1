@@ -15,7 +15,11 @@
             <a class="brand" href="{{ route('blog.index') }}">Cuaderno <span>Naranja</span></a>
             <div style="display:flex; gap:.5rem;">
                 <a class="btn" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="btn" href="{{ route('posts.show', $post) }}">Volver al post</a>
+                @if ($post->isRejected())
+                    <a class="btn" href="{{ route('posts.open', $post->id) }}">Volver al post</a>
+                @else
+                    <a class="btn" href="{{ route('posts.show', $post) }}">Volver al post</a>
+                @endif
             </div>
         </div>
     </header>

@@ -57,8 +57,32 @@ class BlogController extends Controller
         return $this->renderBlogPage();
     }
 
-    public function show(Post $post): View
+    public function show(Post $post): View|RedirectResponse
     {
+        $current = Auth::user();
+
+        if ($post->isRejected() && $current && $current->id == $post->user_id) {
+            return redirect()->route('dashboard')->with('status', 'Este post fue rechazado por moderación.');
+        }
+
+        abort_unless((int) $post->is_published === Post::STATUS_PUBLISHED, 404);
+
+        return $this->renderBlogPage($post);
+    }
+
+    /**
+     * Open a post by id (bypasses implicit binding) so owners can view rejection notice.
+     */
+    public function open(int $id): View|RedirectResponse
+    {
+        $post = Post::where('id', $id)->firstOrFail();
+
+        $current = Auth::user();
+
+        if ($post->isRejected() && $current && $current->id == $post->user_id) {
+            return redirect()->route('dashboard')->with('status', 'Este post fue rechazado por moderación.');
+        }
+
         abort_unless((int) $post->is_published === Post::STATUS_PUBLISHED, 404);
 
         return $this->renderBlogPage($post);
@@ -125,7 +149,11 @@ class BlogController extends Controller
                 : null,
         ]);
 
-        return redirect()->route('posts.show', $post)->with('status', 'Post actualizado correctamente.');
+        if ((int) $post->is_published === Post::STATUS_PUBLISHED) {
+            return redirect()->route('posts.show', $post)->with('status', 'Post actualizado correctamente.');
+        }
+
+        return redirect()->route('dashboard')->with('status', 'Post actualizado correctamente.');
     }
 
     public function destroy(Post $post): RedirectResponse

@@ -73,7 +73,11 @@
                             <td>{{ number_format((float) ($post->ratings_avg_score ?? 0), 1) }}</td>
                             <td>
                                 <div style="display:flex; gap:.4rem; flex-wrap:wrap;">
-                                    <a class="btn" href="{{ route('posts.show', $post) }}">Abrir</a>
+                                    @if ($post->isRejected() && $user->id == $post->user_id)
+                                        <a class="btn" href="{{ route('posts.open', $post->id) }}">Abrir</a>
+                                    @else
+                                        <a class="btn" href="{{ route('posts.show', $post) }}">Abrir</a>
+                                    @endif
                                     <a class="btn" href="{{ route('posts.edit', $post) }}">Editar</a>
                                     <form method="POST" action="{{ route('posts.destroy', $post) }}" onsubmit="return confirm('¿Eliminar este post?');">
                                         @csrf

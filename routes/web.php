@@ -34,8 +34,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 	Route::get('/posts/pending', [AdminPostController::class, 'index'])->name('posts.pending');
+	Route::get('/posts/{post}/preview', [AdminPostController::class, 'preview'])->name('posts.preview');
 	Route::patch('/posts/{post}/approve', [AdminPostController::class, 'approve'])->name('posts.approve');
 	Route::patch('/posts/{post}/reject', [AdminPostController::class, 'reject'])->name('posts.reject');
 });
 
 Route::get('/posts/{post}', [BlogController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id}/open', [BlogController::class, 'open'])->name('posts.open');

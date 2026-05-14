@@ -53,6 +53,7 @@
                             <td>{{ optional($post->created_at)->format('d/m/Y') ?? '-' }}</td>
                             <td>
                                 <div style="display:flex; gap:.4rem; flex-wrap:wrap;">
+                                    <a class="btn" href="{{ route('admin.posts.preview', $post) }}">Ver</a>
                                     <form method="POST" action="{{ route('admin.posts.approve', $post) }}" onsubmit="return confirm('¿Aprobar y publicar este post?');">
                                         @csrf
                                         @method('PATCH')
