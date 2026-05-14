@@ -30,7 +30,7 @@ class BlogController extends Controller
             'user' => $user,
             'posts' => $posts,
             'totalPosts' => $posts->count(),
-            'publishedPosts' => $posts->where('is_published', true)->count(),
+            'publishedPosts' => $posts->where('is_published', Post::STATUS_PUBLISHED)->count(),
             'totalComments' => $posts->sum('comments_count'),
             'averageRating' => $posts->avg('ratings_avg_score') ? round((float) $posts->avg('ratings_avg_score'), 1) : 0,
         ]);
@@ -59,7 +59,7 @@ class BlogController extends Controller
 
     public function show(Post $post): View
     {
-        abort_unless($post->is_published, 404);
+        abort_unless((int) $post->is_published === Post::STATUS_PUBLISHED, 404);
 
         return $this->renderBlogPage($post);
     }
@@ -81,8 +81,8 @@ class BlogController extends Controller
             'title' => $validated['title'],
             'content' => $validated['content'],
             'image_path' => $imagePath,
-            'is_published' => false, // Cambiamos esto a false
-            'published_at' => null,  // Cambiamos esto a null
+            'is_published' => Post::STATUS_DRAFT,
+            'published_at' => null,
         ]);
 
         return redirect()->route('dashboard')->with('status', 'Post enviado a revisión. Un administrador lo publicará pronto.');
@@ -119,8 +119,8 @@ class BlogController extends Controller
             'title' => $validated['title'],
             'content' => $validated['content'],
             'image_path' => $imagePath,
-            'is_published' => (bool) ($validated['is_published'] ?? true),
-            'published_at' => (bool) ($validated['is_published'] ?? true)
+            'is_published' => (int) ($validated['is_published'] ?? Post::STATUS_PUBLISHED),
+            'published_at' => (int) ($validated['is_published'] ?? Post::STATUS_PUBLISHED) === Post::STATUS_PUBLISHED
                 ? ($post->published_at ?? now())
                 : null,
         ]);
@@ -143,7 +143,7 @@ class BlogController extends Controller
 
     public function storeComment(Request $request, Post $post): RedirectResponse
     {
-        abort_unless($post->is_published, 404);
+        abort_unless((int) $post->is_published === Post::STATUS_PUBLISHED, 404);
 
         $validated = $request->validate([
             'content' => ['required', 'string', 'min:8', 'max:1000'],
@@ -196,7 +196,7 @@ class BlogController extends Controller
 
     public function storeRating(Request $request, Post $post): RedirectResponse
     {
-        abort_unless($post->is_published, 404);
+        abort_unless((int) $post->is_published === Post::STATUS_PUBLISHED, 404);
     
         $validated = $request->validate([
             'score' => ['required', 'integer', 'between:1,5'],
@@ -258,7 +258,7 @@ class BlogController extends Controller
             ->get(['id', 'name']);
 
         $posts = Post::query()
-            ->where('is_published', true)
+            ->where('is_published', Post::STATUS_PUBLISHED)
             ->with([
                 'user:id,name',
                 'comments.user:id,name',

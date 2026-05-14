@@ -32,7 +32,7 @@
         <section class="hero">
             <p class="muted">Panel de moderacion</p>
             <h1>Posts pendientes</h1>
-            <p class="muted">Publicaciones en estado borrador listas para aprobacion.</p>
+            <p class="muted">Publicaciones sin publicar listas para aprobación.</p>
         </section>
 
         <section class="table-wrap">
@@ -52,11 +52,18 @@
                             <td>{{ $post->user?->name ?? 'Sin autor' }}</td>
                             <td>{{ optional($post->created_at)->format('d/m/Y') ?? '-' }}</td>
                             <td>
-                                <form method="POST" action="{{ route('admin.posts.approve', $post) }}" onsubmit="return confirm('¿Aprobar y publicar este post?');">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button class="btn primary" type="submit">Aprobar y Publicar</button>
-                                </form>
+                                <div style="display:flex; gap:.4rem; flex-wrap:wrap;">
+                                    <form method="POST" action="{{ route('admin.posts.approve', $post) }}" onsubmit="return confirm('¿Aprobar y publicar este post?');">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="btn primary" type="submit">Aprobar y Publicar</button>
+                                    </form>
+                                    <form method="POST" action="{{ route('admin.posts.reject', $post) }}" onsubmit="return confirm('¿Rechazar este post?');">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="btn" type="submit">Rechazar</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

@@ -62,9 +62,12 @@
                             <td>{{ $post->title }}</td>
                             <td>{{ optional($post->published_at)->format('d/m/Y') ?? '-' }}</td>
                             <td>
-                                <span class="status {{ $post->is_published ? 'ok' : 'draft' }}">
-                                    {{ $post->is_published ? 'Publicado' : 'Borrador' }}
+                                <span class="status {{ $post->publicationStatusClass() }}">
+                                    {{ $post->publicationStatusLabel() }}
                                 </span>
+                                @if ($post->isRejected())
+                                    <div class="muted" style="margin-top:.35rem; font-size:.82rem;">Tu post fue rechazado por moderacion.</div>
+                                @endif
                             </td>
                             <td>{{ $post->comments_count }}</td>
                             <td>{{ number_format((float) ($post->ratings_avg_score ?? 0), 1) }}</td>

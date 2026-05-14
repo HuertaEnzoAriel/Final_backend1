@@ -15,6 +15,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    public const STATUS_DRAFT = 0;
+    public const STATUS_PUBLISHED = 1;
+    public const STATUS_REJECTED = 2;
+
     protected $fillable = [
         'user_id',
         'title',
@@ -27,9 +31,42 @@ class Post extends Model
     protected function casts(): array
     {
         return [
-            'is_published' => 'boolean',
+            'is_published' => 'integer',
             'published_at' => 'datetime',
         ];
+    }
+
+    public function isPublished(): bool
+    {
+        return (int) $this->is_published === self::STATUS_PUBLISHED;
+    }
+
+    public function isDraft(): bool
+    {
+        return (int) $this->is_published === self::STATUS_DRAFT;
+    }
+
+    public function isRejected(): bool
+    {
+        return (int) $this->is_published === self::STATUS_REJECTED;
+    }
+
+    public function publicationStatusLabel(): string
+    {
+        return match ((int) $this->is_published) {
+            self::STATUS_PUBLISHED => 'Publicado',
+            self::STATUS_REJECTED => 'Rechazado',
+            default => 'Sin publicar',
+        };
+    }
+
+    public function publicationStatusClass(): string
+    {
+        return match ((int) $this->is_published) {
+            self::STATUS_PUBLISHED => 'ok',
+            self::STATUS_REJECTED => 'rejected',
+            default => 'draft',
+        };
     }
 
     public function user(): BelongsTo

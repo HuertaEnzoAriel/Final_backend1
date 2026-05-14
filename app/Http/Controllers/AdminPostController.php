@@ -14,7 +14,7 @@ class AdminPostController extends Controller
         $this->assertAdmin();
 
         $posts = Post::query()
-            ->where('is_published', false)
+            ->where('is_published', Post::STATUS_DRAFT)
             ->with('user:id,name')
             ->latest('created_at')
             ->get();
@@ -29,20 +29,40 @@ class AdminPostController extends Controller
     {
         $this->assertAdmin();
 
-        if ($post->is_published) {
+        if ((int) $post->is_published !== Post::STATUS_DRAFT) {
             return redirect()
                 ->route('admin.posts.pending')
-                ->with('status', 'El post ya estaba publicado.');
+                ->with('status', 'El post ya no está pendiente.');
         }
 
         $post->update([
-            'is_published' => true,
+            'is_published' => Post::STATUS_PUBLISHED,
             'published_at' => now(),
         ]);
 
         return redirect()
             ->route('admin.posts.pending')
             ->with('status', 'Post aprobado y publicado.');
+    }
+
+    public function reject(Post $post): RedirectResponse
+    {
+        $this->assertAdmin();
+
+        if ((int) $post->is_published !== Post::STATUS_DRAFT) {
+            return redirect()
+                ->route('admin.posts.pending')
+                ->with('status', 'El post ya fue resuelto.');
+        }
+
+        $post->update([
+            'is_published' => Post::STATUS_REJECTED,
+            'published_at' => null,
+        ]);
+
+        return redirect()
+            ->route('admin.posts.pending')
+            ->with('status', 'Post rechazado.');
     }
 
     private function assertAdmin(): void

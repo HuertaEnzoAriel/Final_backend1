@@ -63,6 +63,7 @@ th { font-size: 0.86rem; color: var(--muted); background: #faf5ee; }
 .status { display: inline-block; font-size: 0.78rem; padding: 0.2rem 0.5rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
 .ok { border-color: rgba(31, 122, 140, 0.35); background: rgba(31, 122, 140, 0.12); color: #124c57; }
 .draft { border-color: rgba(225, 106, 45, 0.35); background: rgba(225, 106, 45, 0.12); color: #8c3e12; }
+.rejected { border-color: rgba(179, 50, 50, 0.35); background: rgba(179, 50, 50, 0.12); color: #7f2020; }
 
 @media (max-width: 900px) {
     .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }

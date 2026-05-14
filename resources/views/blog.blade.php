@@ -70,7 +70,7 @@
                         <div class="metric"><strong>{{ $selectedPost->comments_count }}</strong><span>Comentarios</span></div>
                         <div class="metric"><strong>{{ number_format((float) ($selectedPost->ratings_avg_score ?? 0), 1) }}</strong><span>Rating medio</span></div>
                         <div class="metric"><strong>{{ $selectedPost->ratings_count }}</strong><span>Votos</span></div>
-                        <div class="metric"><strong>{{ $selectedPost->is_published ? 'SI' : 'NO' }}</strong><span>Visible</span></div>
+                        <div class="metric"><strong>{{ $selectedPost->publicationStatusLabel() }}</strong><span>Estado</span></div>
                     </div>
                 </aside>
             </section>

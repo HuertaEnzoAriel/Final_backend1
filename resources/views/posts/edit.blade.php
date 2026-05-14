@@ -25,6 +25,10 @@
             <p class="muted">Edicion de publicacion</p>
             <h1>Editar post</h1>
 
+            @if ($post->isRejected())
+                <div class="flash" style="margin-top:1rem;">Este post fue rechazado por moderacion. Puedes corregirlo y volver a guardarlo para reenviarlo.</div>
+            @endif
+
             <form method="POST" action="{{ route('posts.update', $post) }}" class="form-grid" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -58,8 +62,8 @@
                 <div class="field">
                     <label for="is_published">Estado</label>
                     <select id="is_published" name="is_published">
-                        <option value="1" @selected(old('is_published', $post->is_published ? '1' : '0') === '1')>Publicado</option>
-                        <option value="0" @selected(old('is_published', $post->is_published ? '1' : '0') === '0')>Borrador</option>
+                        <option value="1" @selected(old('is_published', (string) ($post->isPublished() ? 1 : 0)) === '1')>Publicado</option>
+                        <option value="0" @selected(old('is_published', (string) ($post->isPublished() ? 1 : 0)) === '0')>Sin publicar</option>
                     </select>
                 </div>
 
