@@ -26,6 +26,7 @@ class Post extends Model
         'image_path',
         'is_published',
         'published_at',
+        'rejection_reason',
     ];
 
     protected function casts(): array

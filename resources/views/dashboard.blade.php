@@ -19,6 +19,7 @@
                 @if ($user->role === 'admin')
                     <a class="btn" href="{{ route('admin.posts.pending') }}">Moderacion</a>
                 @endif
+                <span class="user-name">{{ $user->name }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="btn" type="submit">Salir</button>
@@ -67,6 +68,11 @@
                                 </span>
                                 @if ($post->isRejected())
                                     <div class="muted" style="margin-top:.35rem; font-size:.82rem;">Tu post fue rechazado por moderacion.</div>
+                                    @if ($post->rejection_reason)
+                                        <div style="margin-top:.3rem; font-size:.82rem; color:#7f2020; background:rgba(179,50,50,0.07); border:1px solid rgba(179,50,50,0.2); border-radius:.5rem; padding:.4rem .6rem;">
+                                            <strong>Motivo:</strong> {{ $post->rejection_reason }}
+                                        </div>
+                                    @endif
                                 @endif
                             </td>
                             <td>{{ $post->comments_count }}</td>

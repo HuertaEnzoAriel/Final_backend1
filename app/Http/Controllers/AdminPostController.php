@@ -93,7 +93,7 @@ class AdminPostController extends Controller
             ->with('status', 'Post aprobado y publicado.');
     }
 
-    public function reject(Post $post): RedirectResponse
+    public function reject(Request $request, Post $post): RedirectResponse
     {
         $this->assertAdmin();
 
@@ -103,9 +103,14 @@ class AdminPostController extends Controller
                 ->with('status', 'El post ya fue resuelto.');
         }
 
+        $validated = $request->validate([
+            'rejection_reason' => ['required', 'string', 'max:500'],
+        ]);
+
         $post->update([
             'is_published' => Post::STATUS_REJECTED,
             'published_at' => null,
+            'rejection_reason' => $validated['rejection_reason'],
         ]);
 
         return redirect()

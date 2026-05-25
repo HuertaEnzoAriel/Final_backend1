@@ -51,6 +51,7 @@ textarea { min-height: 170px; resize: vertical; }
 .top { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
 
 .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+.user-name { font-size: 0.88rem; color: var(--muted); font-weight: 500; }
 
 .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1rem; }
 .metric { border: 1px dashed var(--line); border-radius: 0.8rem; background: #fff; padding: 0.75rem; }
@@ -69,6 +70,24 @@ th { font-size: 0.86rem; color: var(--muted); background: #faf5ee; }
 .role-admin { border-color: rgba(138, 77, 31, 0.35); background: rgba(138, 77, 31, 0.12); color: #7b4417; }
 .role-editor { border-color: rgba(31, 122, 140, 0.35); background: rgba(31, 122, 140, 0.12); color: #124c57; }
 .role-user { border-color: rgba(90, 95, 107, 0.35); background: rgba(90, 95, 107, 0.12); color: #4a515d; }
+
+.row-self td { background: rgba(246, 240, 231, 0.55); }
+.badge-you {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(138, 77, 31, 0.12);
+    border: 1px solid rgba(138, 77, 31, 0.28);
+    color: #7b4417;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    letter-spacing: 0.02em;
+}
+.muted-cell { color: var(--muted); font-size: 0.88rem; }
+.select-disabled { opacity: 0.5; cursor: not-allowed; min-width: 9rem; }
+.role-save-btn:disabled { opacity: 0.38; cursor: not-allowed; }
 
 @media (max-width: 900px) {
     .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }

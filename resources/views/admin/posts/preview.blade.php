@@ -52,13 +52,59 @@
                     @method('PATCH')
                     <button class="btn primary" type="submit">Aprobar y publicar</button>
                 </form>
-                <form method="POST" action="{{ route('admin.posts.reject', $post) }}" onsubmit="return confirm('¿Rechazar este post?');">
-                    @csrf
-                    @method('PATCH')
-                    <button class="btn" type="submit">Rechazar</button>
-                </form>
+                <button
+                    class="btn"
+                    type="button"
+                    data-reject-action="{{ route('admin.posts.reject', $post) }}"
+                >Rechazar</button>
             </div>
         </section>
     </main>
+
+    <div id="reject-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:100; align-items:center; justify-content:center;">
+        <div style="background:#fff; border-radius:1rem; padding:1.5rem; width:100%; max-width:480px; margin:1rem; box-shadow:0 8px 32px rgba(0,0,0,0.18);">
+            <p class="muted" style="margin:0 0 .25rem;">Rechazar publicacion</p>
+            <h2 style="margin:0 0 1rem; font-family:'Fraunces', Georgia, serif; font-size:1.3rem;">{{ $post->title }}</h2>
+            <form method="POST" id="reject-form" action="{{ route('admin.posts.reject', $post) }}">
+                @csrf
+                @method('PATCH')
+                <div class="field" style="margin-bottom:1rem;">
+                    <label for="rejection_reason">Motivo del rechazo <span style="color:#c0392b;">*</span></label>
+                    <textarea
+                        id="rejection_reason"
+                        name="rejection_reason"
+                        rows="4"
+                        maxlength="500"
+                        required
+                        placeholder="Explicá al autor por qué se rechaza su publicacion..."
+                        style="margin-top:.35rem;"
+                    ></textarea>
+                    <small class="muted" style="display:block; margin-top:.3rem;">Maximo 500 caracteres. El autor podrá ver este motivo.</small>
+                </div>
+                <div style="display:flex; gap:.6rem; justify-content:flex-end;">
+                    <button type="button" class="btn" id="reject-cancel">Cancelar</button>
+                    <button type="submit" class="btn" style="background:#b33232; border-color:#b33232; color:#fff;">Confirmar rechazo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        var modal = document.getElementById('reject-modal');
+
+        document.querySelector('[data-reject-action]').addEventListener('click', function () {
+            modal.style.display = 'flex';
+        });
+
+        document.getElementById('reject-cancel').addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+    })();
+    </script>
 </body>
 </html>
