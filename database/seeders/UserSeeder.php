@@ -13,8 +13,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Crear admin desde .env
+        User::updateOrCreate(
+            ['email' => env('ADMIN_EMAIL')],
+            [
+                'name'     => env('ADMIN_NAME'),
+                'password' => bcrypt(env('ADMIN_PASSWORD')),
+                'role'     => 'admin',
+            ]
+        );
+
+        // Otros usuarios fijos
         $users = [
-            ['name' => env('ADMIN_NAME'), 'email' => env('ADMIN_EMAIL'), 'password' => env('ADMIN_PASSWORD'), 'role' => 'admin'],
             ['name' => 'Ana Torres', 'email' => 'ana@example.com', 'password' => 'password', 'role' => 'admin'],
             ['name' => 'Luis Moreno', 'email' => 'luis@example.com', 'password' => 'password', 'role' => 'editor'],
             ['name' => 'Marta Rivas', 'email' => 'marta@example.com', 'password' => 'password', 'role' => 'user'],
@@ -26,9 +36,9 @@ class UserSeeder extends Seeder
             User::updateOrCreate(
                 ['email' => $user['email']],
                 [
-                    'name' => $user['name'],
+                    'name'     => $user['name'],
                     'password' => bcrypt($user['password']),
-                    'role' => $user['role'],
+                    'role'     => $user['role'],
                 ]
             );
         }
