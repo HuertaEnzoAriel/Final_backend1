@@ -14,7 +14,9 @@
         <div class="container head-inner">
             <a class="brand" href="{{ route('blog.index') }}">Cuaderno <span>Naranja</span></a>
             <div class="actions">
-                <a class="btn primary" href="{{ route('posts.create') }}">Nuevo post</a>
+                @if ($user->canPublish())
+                    <a class="btn primary" href="{{ route('posts.create') }}">Nuevo post</a>
+                @endif
                 <a class="btn" href="{{ route('blog.index') }}">Ver blog</a>
                 @if ($user->role === 'admin')
                     <a class="btn" href="{{ route('admin.posts.pending') }}">Moderacion</a>

@@ -31,6 +31,21 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isEditor(): bool
+    {
+        return $this->role === 'editor';
+    }
+
+    public function canPublish(): bool
+    {
+        return $this->isEditor() || $this->isAdmin();
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);

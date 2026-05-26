@@ -22,7 +22,9 @@
                         @if ($currentUser->role === 'admin')
                             <li><a href="{{ route('admin.posts.pending') }}">Moderacion</a></li>
                         @endif
-                        <li><a href="{{ route('posts.create') }}">Publicar</a></li>
+                        @if ($currentUser->canPublish())
+                            <li><a href="{{ route('posts.create') }}">Publicar</a></li>
+                        @endif
                         <li><span class="muted">{{ $currentUser->name }}</span></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">

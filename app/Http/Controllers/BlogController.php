@@ -38,6 +38,8 @@ class BlogController extends Controller
 
     public function create(): View
     {
+        $this->assertCanPost();
+
         return view('posts.create', [
             'user' => Auth::user(),
         ]);
@@ -90,6 +92,8 @@ class BlogController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $this->assertCanPost();
+
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:180'],
             'content' => ['required', 'string', 'min:20'],
@@ -341,6 +345,12 @@ class BlogController extends Controller
             'currentUser' => $currentUser,
             'currentUserRating' => $currentUserRating,
         ]);
+    }
+
+    private function assertCanPost(): void
+    {
+        $user = Auth::user();
+        abort_unless($user && $user->canPublish(), 403);
     }
 
     private function assertCanManageOwner(int $ownerId): void
