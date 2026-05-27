@@ -30,6 +30,22 @@
             <div class="flash">{{ session('status') }}</div>
         @endif
 
+        @if ($editorRequests->isNotEmpty())
+            <div style="background:#fff8e1; border:1px solid #f0c040; border-radius:.7rem; padding:.9rem 1.1rem; margin-bottom:1rem;">
+                <strong style="display:block; margin-bottom:.4rem;">
+                    {{ $editorRequests->count() === 1 ? 'Un usuario quiere' : $editorRequests->count() . ' usuarios quieren' }} ser editor
+                </strong>
+                <ul style="margin:0; padding-left:1.2rem;">
+                    @foreach ($editorRequests as $req)
+                        <li>{{ $req->name }} — solicitado {{ $req->requested_editor_at->diffForHumans() }}</li>
+                    @endforeach
+                </ul>
+                <p class="muted" style="margin:.6rem 0 0; font-size:.85rem;">
+                    Usá la sección <strong>Cambiar rol</strong> más abajo para promoverlos.
+                </p>
+            </div>
+        @endif
+
         <section class="hero">
             <p class="muted">Panel de moderacion</p>
             <h1>Posts pendientes</h1>

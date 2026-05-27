@@ -347,10 +347,39 @@ class BlogController extends Controller
         ]);
     }
 
+    public function requestEditor(): RedirectResponse
+    {
+        $user = Auth::user();
+
+        if ($user->canPublish()) {
+            return redirect()->route('dashboard')
+                ->with('status', 'Ya tenés permisos para publicar.');
+        }
+
+        if ($user->requested_editor_at) {
+            return redirect()->route('dashboard')
+                ->with('status', 'Ya enviaste una solicitud. Esperá la respuesta del administrador.');
+        }
+
+        $user->update(['requested_editor_at' => now()]);
+
+        return redirect()->route('dashboard')
+            ->with('status', 'Solicitud enviada. El administrador la revisará pronto.');
+    }
+
     private function assertCanPost(): void
     {
         $user = Auth::user();
-        abort_unless($user && $user->canPublish(), 403);
+        if ($user && $user->canPublish()) {
+            return;
+        }
+        $message = ($user && $user->requested_editor_at)
+            ? 'Tu solicitud de editor está pendiente. El administrador la revisará pronto.'
+            : 'Necesitás el rol de editor para publicar. Podés solicitarlo desde tu dashboard.';
+
+        throw new \Illuminate\Http\Exceptions\HttpResponseException(
+            redirect()->route('blog.index')->with('status', $message)
+        );
     }
 
     private function assertCanManageOwner(int $ownerId): void

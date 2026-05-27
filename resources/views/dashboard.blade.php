@@ -16,6 +16,13 @@
             <div class="actions">
                 @if ($user->canPublish())
                     <a class="btn primary" href="{{ route('posts.create') }}">Nuevo post</a>
+                @elseif (!$user->requested_editor_at)
+                    <form method="POST" action="{{ route('editor.request') }}">
+                        @csrf
+                        <button class="btn primary" type="submit">Solicitar ser editor</button>
+                    </form>
+                @else
+                    <span class="btn" style="opacity:.6; cursor:default;">Solicitud enviada</span>
                 @endif
                 <a class="btn" href="{{ route('blog.index') }}">Ver blog</a>
                 @if ($user->role === 'admin')

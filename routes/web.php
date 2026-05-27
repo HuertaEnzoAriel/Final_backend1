@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('/ratings/{rating}/edit', [BlogController::class, 'editRating'])->name('ratings.edit');
 	Route::patch('/ratings/{rating}', [BlogController::class, 'updateRating'])->name('ratings.update');
 	Route::delete('/ratings/{rating}', [BlogController::class, 'destroyRating'])->name('ratings.destroy');	
+	Route::post('/editor-request', [BlogController::class, 'requestEditor'])->name('editor.request');
 	Route::post('/posts/{post}/comments', [BlogController::class, 'storeComment'])->name('posts.comments.store');
 	Route::post('/posts/{post}/ratings', [BlogController::class, 'storeRating'])->name('posts.ratings.store');
 });

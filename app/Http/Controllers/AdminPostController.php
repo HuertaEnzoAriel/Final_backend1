@@ -42,11 +42,18 @@ class AdminPostController extends Controller
             ->orderBy('name')
             ->get(['id', 'name', 'email', 'role']);
 
+        $editorRequests = User::query()
+            ->whereNotNull('requested_editor_at')
+            ->where('role', 'user')
+            ->orderBy('requested_editor_at')
+            ->get(['id', 'name', 'requested_editor_at']);
+
         return view('admin.posts.pending', [
-            'posts' => $posts,
-            'users' => $users,
-            'roles' => self::ROLES,
-            'user' => Auth::user(),
+            'posts'          => $posts,
+            'users'          => $users,
+            'roles'          => self::ROLES,
+            'user'           => Auth::user(),
+            'editorRequests' => $editorRequests,
         ]);
     }
 
@@ -65,7 +72,8 @@ class AdminPostController extends Controller
         ]);
 
         $user->update([
-            'role' => $validated['role'],
+            'role'                => $validated['role'],
+            'requested_editor_at' => null,
         ]);
 
         return redirect()
