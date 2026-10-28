@@ -1,0 +1,13 @@
+@reference "../../App.css";
+
+.encabezado-seccion {
+  @apply mb-10 border-t-4 border-texto pt-4;
+}
+
+.encabezado-seccion__titulo {
+  @apply font-titulo text-4xl font-black text-texto md:text-5xl;
+}
+
+.encabezado-seccion__bajada {
+  @apply mt-3 max-w-2xl text-lg text-texto-suave;
+}

@@ -26,4 +26,23 @@
  * @typedef {{ posts: PostResumen[], stats: Estadisticas, top: PostResumen[] }} RespuestaInicio
  */
 
+/**
+ * @typedef {{ posts: PostResumen[] }} RespuestaRanking
+ */
+
+/**
+ * @typedef {{
+ *   id: number,
+ *   name: string,
+ *   posts_count: number,
+ *   comments_count: number,
+ *   rating_avg: number,
+ *   posts: PostResumen[],
+ * }} Autor
+ */
+
+/**
+ * @typedef {{ authors: Autor[] }} RespuestaAutores
+ */
+
 export {}

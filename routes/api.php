@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 // Públicas (invitados incluidos).
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/ranking', [PostController::class, 'ranking']);
+Route::get('/authors', [PostController::class, 'authors']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 

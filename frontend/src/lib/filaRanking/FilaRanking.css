@@ -1,0 +1,26 @@
+@reference "../../App.css";
+
+.fila-ranking {
+  @apply flex items-center gap-4 border-b border-borde py-5 last:border-0 md:gap-6;
+}
+
+.fila-ranking__numero {
+  @apply w-12 shrink-0 font-titulo text-4xl leading-none font-black text-acento md:text-5xl;
+}
+
+/* La miniatura se oculta en móvil para dejar lugar al título. */
+.fila-ranking__imagen {
+  @apply hidden aspect-[16/10] w-36 shrink-0 overflow-hidden rounded-lg sm:block;
+}
+
+.fila-ranking__cuerpo {
+  @apply flex min-w-0 flex-col gap-1;
+}
+
+.fila-ranking__titulo {
+  @apply font-titulo text-xl leading-snug font-bold text-texto transition-colors hover:text-acento md:text-2xl;
+}
+
+.fila-ranking__numeros {
+  @apply text-xs font-semibold tracking-[0.14em] text-acento uppercase;
+}

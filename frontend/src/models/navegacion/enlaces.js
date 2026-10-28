@@ -11,6 +11,9 @@ export const ACCESO = {
 // Secciones del blog, visibles en la barra. `roles` limita el enlace a esos roles.
 export const ENLACES = [
   { texto: 'Inicio', ruta: RUTAS.INICIO, acceso: ACCESO.TODOS },
+  { texto: 'Ranking', ruta: RUTAS.RANKING, acceso: ACCESO.TODOS },
+  { texto: 'Autores', ruta: RUTAS.AUTORES, acceso: ACCESO.TODOS },
+  { texto: 'Acerca de', ruta: RUTAS.ACERCA, acceso: ACCESO.TODOS },
 ]
 
 // Opciones de cuenta, dentro del menú del ícono de usuario.

@@ -1,6 +1,9 @@
 // Rutas del front (van después del # en la URL: #/login, #/posts/5).
 export const RUTAS = {
   INICIO: '/',
+  RANKING: '/ranking',
+  AUTORES: '/autores',
+  ACERCA: '/acerca',
   LOGIN: '/login',
   REGISTRO: '/registro',
   DASHBOARD: '/dashboard',

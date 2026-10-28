@@ -1,0 +1,33 @@
+@reference "../../App.css";
+
+.tarjeta-autor {
+  @apply flex flex-col gap-5 rounded-lg border border-borde bg-superficie p-6;
+}
+
+.tarjeta-autor__cabecera {
+  @apply flex items-center gap-4;
+}
+
+.tarjeta-autor__avatar {
+  @apply grid size-14 shrink-0 place-items-center rounded-full bg-acento font-titulo text-2xl font-black text-sobre-acento;
+}
+
+.tarjeta-autor__nombre {
+  @apply font-titulo text-2xl font-bold text-texto;
+}
+
+.tarjeta-autor__numeros {
+  @apply mt-1 text-xs font-semibold tracking-[0.14em] text-acento uppercase;
+}
+
+.tarjeta-autor__posts {
+  @apply flex flex-col border-t border-borde;
+}
+
+.tarjeta-autor__item {
+  @apply border-b border-borde last:border-0;
+}
+
+.tarjeta-autor__post {
+  @apply block py-2 text-texto transition-colors hover:text-acento;
+}

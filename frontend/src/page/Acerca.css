@@ -1,0 +1,37 @@
+@reference "../App.css";
+
+.acerca {
+  @apply flex max-w-3xl flex-col gap-5;
+}
+
+.acerca__parrafo {
+  @apply text-lg leading-relaxed text-texto;
+}
+
+.acerca__subtitulo {
+  @apply mt-6 font-titulo text-2xl font-black text-texto;
+}
+
+.acerca__roles {
+  @apply grid gap-4 sm:grid-cols-2;
+}
+
+.acerca__rol {
+  @apply rounded-lg border border-borde bg-superficie p-5;
+}
+
+.acerca__rol-nombre {
+  @apply text-xs font-semibold tracking-[0.18em] text-acento uppercase;
+}
+
+.acerca__rol-texto {
+  @apply mt-2 text-texto-suave;
+}
+
+.acerca__enlaces {
+  @apply mt-4 flex flex-wrap gap-4;
+}
+
+.acerca__enlace {
+  @apply rounded-full bg-acento px-6 py-3 text-xs font-semibold tracking-[0.18em] text-sobre-acento uppercase transition-colors hover:bg-acento-hover;
+}

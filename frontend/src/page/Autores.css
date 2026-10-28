@@ -1,0 +1,5 @@
+@reference "../App.css";
+
+.autores {
+  @apply grid gap-8 md:grid-cols-2;
+}

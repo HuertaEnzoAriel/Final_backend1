@@ -3,6 +3,9 @@
   import Inicio from '../../page/Inicio.svelte'
   import Login from '../../page/Login.svelte'
   import Registro from '../../page/Registro.svelte'
+  import Ranking from '../../page/Ranking.svelte'
+  import Autores from '../../page/Autores.svelte'
+  import Acerca from '../../page/Acerca.svelte'
   import { RUTAS } from '../../models/rutas/rutas.js'
 
   // Tabla de páginas: { ruta, componente }. Se completa al migrar cada vista.
@@ -12,6 +15,9 @@
     { ruta: RUTAS.INICIO, componente: Inicio },
     { ruta: RUTAS.LOGIN, componente: Login },
     { ruta: RUTAS.REGISTRO, componente: Registro },
+    { ruta: RUTAS.RANKING, componente: Ranking },
+    { ruta: RUTAS.AUTORES, componente: Autores },
+    { ruta: RUTAS.ACERCA, componente: Acerca },
   ]
 
   let hash = $state(window.location.hash)
