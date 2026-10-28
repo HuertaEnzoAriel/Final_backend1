@@ -1,0 +1,13 @@
+@reference "../../App.css";
+
+.boton {
+  @apply inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors;
+}
+
+.boton--primario {
+  @apply bg-acento text-sobre-acento hover:bg-acento-hover;
+}
+
+.boton--secundario {
+  @apply border border-borde text-texto hover:border-acento hover:text-acento;
+}

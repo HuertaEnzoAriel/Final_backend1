@@ -1,0 +1,29 @@
+@reference "../App.css";
+
+.inicio {
+  @apply grid gap-12 lg:grid-cols-3;
+}
+
+.inicio__ultimos {
+  @apply lg:col-span-2;
+}
+
+.inicio__encabezado {
+  @apply mb-8 flex items-baseline justify-between border-t-4 border-texto pt-4;
+}
+
+.inicio__titulo {
+  @apply font-titulo text-3xl font-black text-texto;
+}
+
+.inicio__contador {
+  @apply text-xs tracking-[0.14em] text-texto-suave uppercase;
+}
+
+.inicio__grilla {
+  @apply grid gap-10 sm:grid-cols-2;
+}
+
+.inicio__lateral {
+  @apply flex flex-col gap-10;
+}

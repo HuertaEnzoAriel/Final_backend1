@@ -1,0 +1,9 @@
+@reference "../../App.css";
+
+.imagen-post {
+  @apply h-full w-full object-cover;
+}
+
+.imagen-post--vacia {
+  @apply flex items-center justify-center bg-superficie font-titulo text-6xl font-black text-acento;
+}

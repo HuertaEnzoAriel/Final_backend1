@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+/*
+ * Alias de color: ÚNICO lugar del proyecto donde se escriben valores de color.
+ * `--color-*: initial` borra la paleta por defecto de Tailwind, así que solo
+ * existen estas clases (bg-fondo, text-acento, border-borde, ...).
+ */
+@theme {
+  --color-*: initial;
+
+  --color-fondo: #ffffff;
+  --color-superficie: #f4f4f1;
+  --color-texto: #0e0e10;
+  --color-texto-suave: #5d5d63;
+  --color-borde: #e3e2dd;
+  --color-acento: #ff4f00;
+  --color-acento-hover: #e04400;
+  --color-sobre-acento: #ffffff;
+  --color-peligro: #d92d20;
+  --color-exito: #0f7b55;
+
+  --font-titulo: 'Playfair Display', Georgia, serif;
+  --font-texto: 'Inter', system-ui, sans-serif;
+}
+
+/* Modo oscuro: mismos alias, otros valores. Se activa con la clase .dark en <html>. */
+.dark {
+  color-scheme: dark;
+
+  --color-fondo: #0c0c0e;
+  --color-superficie: #17171b;
+  --color-texto: #f2f1ee;
+  --color-texto-suave: #a2a2a8;
+  --color-borde: #2b2b31;
+  --color-acento: #ff6a26;
+  --color-acento-hover: #ff8547;
+  --color-sobre-acento: #0c0c0e;
+  --color-peligro: #f97066;
+  --color-exito: #3ccf91;
+}
+
+@layer base {
+  body {
+    @apply bg-fondo font-texto text-texto antialiased transition-colors;
+  }
+}
+
+.app {
+  @apply min-h-screen;
+}

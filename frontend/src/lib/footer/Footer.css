@@ -1,0 +1,21 @@
+@reference "../../App.css";
+
+.footer {
+  @apply border-t border-borde bg-superficie;
+}
+
+.footer__contenido {
+  @apply mx-auto flex max-w-6xl flex-col gap-1 px-4 py-8 md:flex-row md:items-center md:justify-between;
+}
+
+.footer__marca {
+  @apply font-titulo text-lg font-black text-texto;
+}
+
+.footer__marca-acento {
+  @apply text-acento;
+}
+
+.footer__texto {
+  @apply text-xs tracking-[0.18em] text-texto-suave uppercase;
+}

@@ -1,0 +1,21 @@
+@reference "../../App.css";
+
+.tarjeta {
+  @apply flex flex-col gap-3;
+}
+
+.tarjeta__imagen {
+  @apply mb-1 block aspect-[16/10] overflow-hidden rounded-lg;
+}
+
+.tarjeta__titulo {
+  @apply font-titulo text-2xl leading-snug font-bold text-texto transition-colors hover:text-acento;
+}
+
+.tarjeta__resumen {
+  @apply leading-relaxed text-texto-suave;
+}
+
+.tarjeta__numeros {
+  @apply text-xs font-semibold tracking-[0.14em] text-acento uppercase;
+}

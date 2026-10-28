@@ -1,0 +1,17 @@
+@reference "../../App.css";
+
+.top__item {
+  @apply flex gap-4 border-b border-borde py-3 last:border-0;
+}
+
+.top__numero {
+  @apply font-titulo text-3xl leading-none font-black text-acento;
+}
+
+.top__titulo {
+  @apply font-semibold text-texto transition-colors hover:text-acento;
+}
+
+.top__meta {
+  @apply mt-1 text-xs text-texto-suave;
+}

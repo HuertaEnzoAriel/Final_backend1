@@ -1,0 +1,21 @@
+@reference "../App.css";
+
+.no-encontrado {
+  @apply mx-auto flex max-w-xl flex-col items-center gap-4 py-20 text-center;
+}
+
+.no-encontrado__codigo {
+  @apply font-titulo text-8xl font-black text-acento;
+}
+
+.no-encontrado__titulo {
+  @apply font-titulo text-3xl font-bold text-texto;
+}
+
+.no-encontrado__texto {
+  @apply text-texto-suave;
+}
+
+.no-encontrado__enlace {
+  @apply mt-2 rounded-full bg-acento px-6 py-3 text-xs font-semibold tracking-[0.18em] text-sobre-acento uppercase transition-colors hover:bg-acento-hover;
+}

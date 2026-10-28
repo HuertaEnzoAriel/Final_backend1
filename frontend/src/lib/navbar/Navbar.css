@@ -1,0 +1,49 @@
+@reference "../../App.css";
+
+.navbar {
+  @apply sticky top-0 z-40 border-b border-borde bg-fondo/95 backdrop-blur;
+}
+
+.navbar__barra {
+  @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-4;
+}
+
+.navbar__marca {
+  @apply font-titulo text-2xl font-black tracking-tight text-texto md:text-3xl;
+}
+
+.navbar__marca-acento {
+  @apply text-acento;
+}
+
+.navbar__acciones {
+  @apply flex items-center gap-2;
+}
+
+.navbar__menu {
+  @apply rounded-md border border-borde px-3 py-1.5 text-texto md:hidden;
+}
+
+.navbar__nav {
+  @apply hidden border-t border-borde md:block;
+}
+
+.navbar__nav--abierto {
+  @apply block;
+}
+
+.navbar__lista {
+  @apply mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:gap-8 md:py-3;
+}
+
+.navbar__enlace {
+  @apply text-xs font-semibold tracking-[0.18em] text-texto-suave uppercase transition-colors hover:text-acento;
+}
+
+.navbar__usuario {
+  @apply text-xs font-semibold tracking-[0.18em] text-texto uppercase md:ml-auto;
+}
+
+.navbar__salir {
+  @apply cursor-pointer text-xs font-semibold tracking-[0.18em] text-acento uppercase hover:text-acento-hover;
+}

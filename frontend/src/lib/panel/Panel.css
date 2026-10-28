@@ -1,0 +1,9 @@
+@reference "../../App.css";
+
+.panel {
+  @apply border-t-4 border-texto pt-4;
+}
+
+.panel__titulo {
+  @apply mb-4 font-titulo text-xl font-bold text-texto;
+}

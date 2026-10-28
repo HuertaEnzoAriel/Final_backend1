@@ -1,0 +1,9 @@
+@reference "../../App.css";
+
+.meta-post {
+  @apply text-xs tracking-[0.14em] text-texto-suave uppercase;
+}
+
+.meta-post__autor {
+  @apply font-semibold text-texto;
+}

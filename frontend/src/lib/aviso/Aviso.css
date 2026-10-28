@@ -1,0 +1,9 @@
+@reference "../../App.css";
+
+.aviso {
+  @apply flex flex-col items-start gap-4 rounded-lg border border-borde bg-superficie p-6 text-texto-suave;
+}
+
+.aviso--error {
+  @apply border-peligro text-peligro;
+}

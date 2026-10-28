@@ -1,0 +1,25 @@
+@reference "../../App.css";
+
+.destacado {
+  @apply mb-12 grid gap-8 border-b border-borde pb-12 md:grid-cols-5;
+}
+
+.destacado__imagen {
+  @apply block aspect-[16/10] overflow-hidden rounded-lg md:col-span-3;
+}
+
+.destacado__texto {
+  @apply flex flex-col justify-center gap-5 md:col-span-2;
+}
+
+.destacado__etiqueta {
+  @apply text-xs font-bold tracking-[0.2em] text-acento uppercase;
+}
+
+.destacado__titulo {
+  @apply font-titulo text-4xl leading-tight font-black text-texto transition-colors hover:text-acento md:text-5xl;
+}
+
+.destacado__resumen {
+  @apply text-lg leading-relaxed text-texto-suave;
+}

@@ -1,0 +1,5 @@
+@reference "../../App.css";
+
+.boton-tema {
+  @apply grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition-colors hover:border-acento hover:text-acento;
+}
