@@ -1,7 +1,7 @@
 @reference "../../App.css";
 
 .boton {
-  @apply inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors;
+  @apply inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-60;
 }
 
 .boton--primario {

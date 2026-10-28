@@ -1,0 +1,25 @@
+@reference "../../App.css";
+
+.form-auth {
+  @apply mx-auto flex max-w-md flex-col gap-8 py-8;
+}
+
+.form-auth__titulo {
+  @apply font-titulo text-5xl font-black text-texto;
+}
+
+.form-auth__bajada {
+  @apply mt-3 leading-relaxed text-texto-suave;
+}
+
+.form-auth__form {
+  @apply flex flex-col gap-5;
+}
+
+.form-auth__pie {
+  @apply flex justify-between gap-4 border-t border-borde pt-5;
+}
+
+.form-auth__enlace {
+  @apply text-xs font-semibold tracking-[0.18em] text-texto-suave uppercase transition-colors hover:text-acento;
+}

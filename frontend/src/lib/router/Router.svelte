@@ -1,12 +1,18 @@
 <script>
   import NoEncontrado from '../../page/NoEncontrado.svelte'
   import Inicio from '../../page/Inicio.svelte'
+  import Login from '../../page/Login.svelte'
+  import Registro from '../../page/Registro.svelte'
   import { RUTAS } from '../../models/rutas/rutas.js'
 
   // Tabla de páginas: { ruta, componente }. Se completa al migrar cada vista.
   // Una ruta puede tener parámetros, p. ej. '/posts/:id'.
   /** @type {{ ruta: string, componente: any }[]} */
-  const paginas = [{ ruta: RUTAS.INICIO, componente: Inicio }]
+  const paginas = [
+    { ruta: RUTAS.INICIO, componente: Inicio },
+    { ruta: RUTAS.LOGIN, componente: Login },
+    { ruta: RUTAS.REGISTRO, componente: Registro },
+  ]
 
   let hash = $state(window.location.hash)
 

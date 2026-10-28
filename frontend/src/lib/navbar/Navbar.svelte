@@ -1,7 +1,8 @@
 <script>
   import './Navbar.css'
   import BotonTema from '../botonTema/BotonTema.svelte'
-  import { sesion, cerrarSesion } from '../../state/sesion.svelte.js'
+  import { sesion } from '../../state/sesion.svelte.js'
+  import { salir } from '../../services/auth.js'
   import { ACCESO, ENLACES } from '../../models/navegacion/enlaces.js'
   import { RUTAS } from '../../models/rutas/rutas.js'
   import { SITIO } from '../../models/textos/sitio.js'
@@ -19,9 +20,9 @@
     }),
   )
 
-  function salir() {
-    cerrarSesion()
+  async function alSalir() {
     abierto = false
+    await salir()
     window.location.hash = RUTAS.INICIO
   }
 </script>
@@ -59,7 +60,7 @@
       {#if sesion.usuario}
         <li class="navbar__usuario">{sesion.usuario.name}</li>
         <li>
-          <button class="navbar__salir" type="button" onclick={salir}>Salir</button>
+          <button class="navbar__salir" type="button" onclick={alSalir}>Salir</button>
         </li>
       {/if}
     </ul>

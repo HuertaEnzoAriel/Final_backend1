@@ -2,4 +2,7 @@
 export const ENDPOINTS = {
   USUARIO: '/user',
   POSTS: '/posts',
+  LOGIN: '/login',
+  REGISTRO: '/register',
+  LOGOUT: '/logout',
 }
