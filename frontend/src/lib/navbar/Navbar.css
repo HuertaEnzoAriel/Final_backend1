@@ -9,11 +9,7 @@
 }
 
 .navbar__marca {
-  @apply mr-auto font-titulo text-2xl font-black tracking-tight text-texto md:text-3xl;
-}
-
-.navbar__marca-acento {
-  @apply text-acento;
+  @apply mr-auto;
 }
 
 .navbar__acciones {

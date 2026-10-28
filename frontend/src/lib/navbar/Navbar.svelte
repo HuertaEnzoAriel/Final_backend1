@@ -2,6 +2,7 @@
   import './Navbar.css'
   import BotonTema from '../botonTema/BotonTema.svelte'
   import MenuUsuario from '../menuUsuario/MenuUsuario.svelte'
+  import Logo from '../logo/Logo.svelte'
   import { sesion } from '../../state/sesion.svelte.js'
   import { ENLACES, puedeVer } from '../../models/navegacion/enlaces.js'
   import { RUTAS } from '../../models/rutas/rutas.js'
@@ -16,8 +17,8 @@
 <header class="navbar">
   <!-- Una sola fila: marca a la izquierda; enlaces, tema y menú a la derecha. -->
   <div class="navbar__barra">
-    <a class="navbar__marca" href={'#' + RUTAS.INICIO}>
-      {SITIO.NOMBRE} <span class="navbar__marca-acento">{SITIO.NOMBRE_ACENTO}</span>
+    <a class="navbar__marca" href={'#' + RUTAS.INICIO} aria-label={SITIO.NOMBRE}>
+      <Logo />
     </a>
 
     <nav class="navbar__nav" class:navbar__nav--abierto={abierto}>

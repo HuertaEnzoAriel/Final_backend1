@@ -1,0 +1,38 @@
+@reference "../../App.css";
+
+.logo {
+  @apply inline-flex items-center gap-2.5;
+}
+
+.logo__icono {
+  @apply h-11 w-auto shrink-0 md:h-12;
+}
+
+.logo__acento {
+  @apply fill-acento transition-colors;
+}
+
+.logo__base {
+  @apply fill-texto transition-colors;
+}
+
+/* Wordmark apilado como en la imagen: TECH arriba en acento, BLOG abajo fino. */
+.logo__texto {
+  @apply flex flex-col font-marca leading-none uppercase;
+}
+
+.logo__palabra {
+  @apply text-lg font-normal tracking-[0.12em] text-texto md:text-xl;
+}
+
+.logo__palabra--acento {
+  @apply font-extrabold tracking-[0.04em] text-acento;
+}
+
+.logo--chico .logo__icono {
+  @apply h-8 md:h-8;
+}
+
+.logo--chico .logo__palabra {
+  @apply text-sm md:text-sm;
+}

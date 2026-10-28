@@ -9,11 +9,7 @@
 }
 
 .footer__marca {
-  @apply font-titulo text-lg font-black text-texto;
-}
-
-.footer__marca-acento {
-  @apply text-acento;
+  @apply flex;
 }
 
 .footer__texto {

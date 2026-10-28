@@ -21,6 +21,7 @@
 
   --font-titulo: 'Playfair Display', Georgia, serif;
   --font-texto: 'Inter', system-ui, sans-serif;
+  --font-marca: 'Montserrat', 'Inter', system-ui, sans-serif;
 }
 
 /* Modo oscuro: mismos alias, otros valores. Se activa con la clase .dark en <html>. */

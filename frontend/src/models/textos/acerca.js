@@ -3,9 +3,9 @@ import { RUTAS } from '../rutas/rutas.js'
 // Textos fijos de la página "Acerca de".
 export const ACERCA = {
   TITULO: 'Acerca de',
-  BAJADA: 'Qué es el Cuaderno Naranja y cómo participar.',
+  BAJADA: 'Qué es Tech Blog y cómo participar.',
   PARRAFOS: [
-    'Cuaderno Naranja es un blog para desarrolladores curiosos: artículos sobre programación, herramientas y todo lo que aprendemos en el camino.',
+    'Tech Blog es un blog para desarrolladores curiosos: artículos sobre programación, herramientas y todo lo que aprendemos en el camino.',
     'Cualquiera puede leer. Con una cuenta podés comentar y calificar los artículos; si querés escribir, podés pedir ser editor.',
   ],
   TITULO_ROLES: 'Quién puede hacer qué',
