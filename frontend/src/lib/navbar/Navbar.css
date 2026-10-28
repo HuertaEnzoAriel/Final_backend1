@@ -5,11 +5,11 @@
 }
 
 .navbar__barra {
-  @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-4;
+  @apply mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 px-4 py-4;
 }
 
 .navbar__marca {
-  @apply font-titulo text-2xl font-black tracking-tight text-texto md:text-3xl;
+  @apply mr-auto font-titulo text-2xl font-black tracking-tight text-texto md:text-3xl;
 }
 
 .navbar__marca-acento {
@@ -24,8 +24,9 @@
   @apply rounded-md border border-borde px-3 py-1.5 text-texto md:hidden;
 }
 
+/* En móvil el menú baja a una fila propia, debajo de la marca y el botón. */
 .navbar__nav {
-  @apply hidden border-t border-borde md:block;
+  @apply order-last mt-4 hidden w-full border-t border-borde md:order-none md:mt-0 md:block md:w-auto md:border-0;
 }
 
 .navbar__nav--abierto {
@@ -33,17 +34,9 @@
 }
 
 .navbar__lista {
-  @apply mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:gap-8 md:py-3;
+  @apply flex flex-col gap-3 pt-4 md:flex-row md:items-center md:gap-8 md:pt-0;
 }
 
 .navbar__enlace {
   @apply text-xs font-semibold tracking-[0.18em] text-texto-suave uppercase transition-colors hover:text-acento;
-}
-
-.navbar__usuario {
-  @apply text-xs font-semibold tracking-[0.18em] text-texto uppercase md:ml-auto;
-}
-
-.navbar__salir {
-  @apply cursor-pointer text-xs font-semibold tracking-[0.18em] text-acento uppercase hover:text-acento-hover;
 }

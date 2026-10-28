@@ -1,0 +1,30 @@
+@reference "../../App.css";
+
+.menu-usuario {
+  @apply relative;
+}
+
+/* Mismo aspecto que el botón de tema. */
+.menu-usuario__boton {
+  @apply grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition-colors hover:border-acento hover:text-acento;
+}
+
+.menu-usuario__icono {
+  @apply size-5;
+}
+
+.menu-usuario__panel {
+  @apply absolute right-0 mt-2 flex w-52 flex-col gap-1 rounded-lg border border-borde bg-fondo p-2 shadow-lg;
+}
+
+.menu-usuario__nombre {
+  @apply mb-1 truncate border-b border-borde px-3 pt-1 pb-2 text-sm font-semibold text-texto;
+}
+
+.menu-usuario__enlace {
+  @apply rounded-md px-3 py-2 text-xs font-semibold tracking-[0.18em] text-texto-suave uppercase transition-colors hover:bg-superficie hover:text-acento;
+}
+
+.menu-usuario__salir {
+  @apply cursor-pointer rounded-md px-3 py-2 text-left text-xs font-semibold tracking-[0.18em] text-acento uppercase transition-colors hover:bg-superficie hover:text-acento-hover;
+}
