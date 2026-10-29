@@ -1,5 +1,10 @@
 @reference "../../App.css";
 
 .boton-tema {
-  @apply grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition-colors hover:border-acento hover:text-acento;
+  @apply grid size-9 cursor-pointer place-items-center overflow-hidden rounded-full border border-borde text-texto transition duration-200 hover:scale-110 hover:border-acento hover:text-acento active:scale-90;
+}
+
+/* inline-block: transform no se aplica a elementos inline. */
+.boton-tema__icono {
+  @apply inline-block leading-none;
 }

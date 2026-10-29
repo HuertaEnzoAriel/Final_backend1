@@ -16,17 +16,50 @@
   @apply flex items-center gap-2;
 }
 
+/* Botón hamburguesa: tres líneas apiladas que se transforman en una X. */
 .navbar__menu {
-  @apply rounded-md border border-borde px-3 py-1.5 text-texto md:hidden;
+  @apply flex size-9 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-md border border-borde text-texto transition-colors hover:border-acento hover:text-acento md:hidden;
 }
 
-/* En móvil el menú baja a una fila propia, debajo de la marca y el botón. */
+.navbar__linea {
+  @apply block h-0.5 w-4 rounded-full bg-current transition duration-300 ease-out;
+}
+
+/* gap-1.5 (6px) + alto de línea (2px) = 8px: lo que se mueven las líneas de los extremos hasta el centro. */
+.navbar__menu--abierto {
+  @apply border-acento text-acento;
+}
+
+.navbar__menu--abierto .navbar__linea:nth-child(1) {
+  @apply translate-y-2 rotate-45;
+}
+
+.navbar__menu--abierto .navbar__linea:nth-child(2) {
+  @apply scale-x-0 opacity-0;
+}
+
+.navbar__menu--abierto .navbar__linea:nth-child(3) {
+  @apply -translate-y-2 -rotate-45;
+}
+
+/* Escritorio: los enlaces van en la misma fila. */
 .navbar__nav {
-  @apply order-last mt-4 hidden w-full border-t border-borde md:order-none md:mt-0 md:block md:w-auto md:border-0;
+  @apply hidden md:block;
 }
 
-.navbar__nav--abierto {
-  @apply block;
+/* Móvil: el panel ocupa una fila propia, debajo de la marca y los botones. */
+.navbar__movil {
+  @apply order-last w-full md:hidden;
+}
+
+.navbar__movil .navbar__lista {
+  @apply mt-4 border-t border-borde;
+}
+
+/* Cada enlace del panel móvil entra bajando, uno detrás del otro. */
+.navbar__movil .navbar__item {
+  animation: navbar-entrar 300ms ease-out both;
+  animation-delay: calc(var(--i) * 60ms + 80ms);
 }
 
 .navbar__lista {
@@ -35,4 +68,11 @@
 
 .navbar__enlace {
   @apply text-xs font-semibold tracking-[0.18em] text-texto-suave uppercase transition-colors hover:text-acento;
+}
+
+@keyframes navbar-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
 }

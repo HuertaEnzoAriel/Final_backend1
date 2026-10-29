@@ -1,5 +1,7 @@
 <script>
   import './MenuUsuario.css'
+  import { fade, scale } from 'svelte/transition'
+  import { cubicOut } from 'svelte/easing'
   import { sesion } from '../../state/sesion.svelte.js'
   import { salir } from '../../services/auth.js'
   import { ENLACES_CUENTA, puedeVer } from '../../models/navegacion/enlaces.js'
@@ -34,6 +36,7 @@
 <div class="menu-usuario" bind:this={contenedor}>
   <button
     class="menu-usuario__boton"
+    class:menu-usuario__boton--abierto={abierto}
     type="button"
     aria-label="Menú de cuenta"
     aria-haspopup="menu"
@@ -47,8 +50,14 @@
     </svg>
   </button>
 
+  <!-- Entra creciendo desde la esquina del botón y sale con fade (apunte §9.5). -->
   {#if abierto}
-    <div class="menu-usuario__panel" role="menu">
+    <div
+      class="menu-usuario__panel"
+      role="menu"
+      in:scale={{ start: 0.9, duration: 180, easing: cubicOut }}
+      out:fade={{ duration: 120 }}
+    >
       {#if sesion.usuario}
         <p class="menu-usuario__nombre">{sesion.usuario.name}</p>
       {/if}

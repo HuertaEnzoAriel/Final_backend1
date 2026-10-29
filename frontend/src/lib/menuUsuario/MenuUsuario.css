@@ -6,15 +6,25 @@
 
 /* Mismo aspecto que el botón de tema. */
 .menu-usuario__boton {
-  @apply grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition-colors hover:border-acento hover:text-acento;
+  @apply grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition duration-200 hover:scale-110 hover:border-acento hover:text-acento active:scale-90;
+}
+
+.menu-usuario__boton--abierto {
+  @apply border-acento text-acento;
 }
 
 .menu-usuario__icono {
-  @apply size-5;
+  @apply size-5 transition-transform duration-200;
 }
 
+/* La cabeza del ícono "asiente" al pasar el mouse. */
+.menu-usuario__boton:hover .menu-usuario__icono {
+  @apply -translate-y-0.5;
+}
+
+/* origin-top-right: el scale de entrada nace desde la esquina del botón. */
 .menu-usuario__panel {
-  @apply absolute right-0 mt-2 flex w-52 flex-col gap-1 rounded-lg border border-borde bg-fondo p-2 shadow-lg;
+  @apply absolute right-0 mt-2 flex w-52 origin-top-right flex-col gap-1 rounded-lg border border-borde bg-fondo p-2 shadow-lg;
 }
 
 .menu-usuario__nombre {
