@@ -1,8 +1,8 @@
 <script>
   import './Autores.css'
-  import Aviso from '../lib/aviso/Aviso.svelte'
-  import EncabezadoSeccion from '../lib/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import TarjetaAutor from '../lib/tarjetaAutor/TarjetaAutor.svelte'
+  import Aviso from '../components/aviso/Aviso.svelte'
+  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import TarjetaAutor from '../components/tarjetaAutor/TarjetaAutor.svelte'
   import { pedir } from '../services/api.js'
   import { ENDPOINTS } from '../models/api/endpoints.js'
   import { AUTORES } from '../models/textos/autores.js'

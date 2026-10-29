@@ -1,6 +1,6 @@
 <script>
   import './Acerca.css'
-  import EncabezadoSeccion from '../lib/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
   import { sesion } from '../state/sesion.svelte.js'
   import { RUTAS } from '../models/rutas/rutas.js'
   import { ACERCA } from '../models/textos/acerca.js'

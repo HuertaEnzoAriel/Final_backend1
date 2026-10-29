@@ -1,6 +1,6 @@
 <script>
-  import FormularioAuth from '../lib/formularioAuth/FormularioAuth.svelte'
-  import CampoTexto from '../lib/campoTexto/CampoTexto.svelte'
+  import FormularioAuth from '../components/formularioAuth/FormularioAuth.svelte'
+  import CampoTexto from '../components/campoTexto/CampoTexto.svelte'
   import { registrarse } from '../services/auth.js'
   import { sesion } from '../state/sesion.svelte.js'
   import { RUTAS } from '../models/rutas/rutas.js'

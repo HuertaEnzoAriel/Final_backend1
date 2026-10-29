@@ -1,7 +1,7 @@
 <script>
   import './App.css'
-  import Layout from './lib/layout/Layout.svelte'
-  import Router from './lib/router/Router.svelte'
+  import Layout from './components/layout/Layout.svelte'
+  import Router from './components/router/Router.svelte'
   import { avisarActividad } from './services/api.js'
 </script>
 
