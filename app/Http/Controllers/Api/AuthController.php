@@ -102,4 +102,19 @@ class AuthController extends Controller
         'my_rating' => $user ? $post->ratings()->where('user_id', $user->id)->value('score') : null,
     ]);
 }
+public function comment(Request $request, Post $post): JsonResponse
+{
+    abort_unless($post->isPublished(), 404);
+
+    $validated = $request->validate([
+        'content' => ['required', 'string', 'min:8', 'max:1000'],
+    ]);
+
+    $comment = $post->comments()->create([
+        'user_id' => $request->user()->id,
+        'content' => $validated['content'],
+    ]);
+
+    return response()->json(['comment' => $this->commentData($comment->load('user:id,name'))], 201);
+}
 }
