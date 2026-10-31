@@ -9,6 +9,8 @@ use App\Models\Rating;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -103,4 +105,64 @@ class PostController extends Controller
             'rating_avg' => round((float) ($post->ratings_avg_score ?? 0), 1),
         ];
     }
+        public function show(Request $request, Post $post): JsonResponse
+{
+    abort_unless($post->isPublished(), 404);
+
+    $post->load(['user:id,name', 'comments' => fn ($query) => $query->with('user:id,name')->latest()])
+        ->loadCount(['comments', 'ratings'])
+        ->loadAvg('ratings', 'score');
+
+    $user = $request->user('sanctum');
+
+    return response()->json([
+        'post' => [
+            ...$this->summary($post),
+            'content' => $post->content,
+            'ratings_count' => $post->ratings_count,
+        ],
+        'comments' => $post->comments->map(fn (Comment $comment) => $this->commentData($comment)),
+        'my_rating' => $user ? $post->ratings()->where('user_id', $user->id)->value('score') : null,
+    ]);
+}
+public function comment(Request $request, Post $post): JsonResponse
+{
+    abort_unless($post->isPublished(), 404);
+
+    $validated = $request->validate([
+        'content' => ['required', 'string', 'min:8', 'max:1000'],
+    ]);
+
+    $comment = $post->comments()->create([
+        'user_id' => $request->user()->id,
+        'content' => $validated['content'],
+    ]);
+
+    return response()->json(['comment' => $this->commentData($comment->load('user:id,name'))], 201);
+}
+public function rate(Request $request, Post $post): JsonResponse
+{
+    abort_unless($post->isPublished(), 404);
+
+    $validated = $request->validate([
+        'score' => ['required', 'integer', 'between:1,5'],
+    ]);
+
+    Rating::updateOrCreate(
+        ['post_id' => $post->id, 'user_id' => $request->user()->id],
+        ['score' => $validated['score']],
+    );
+
+    return response()->json(['score' => $validated['score']]);
+}
+private function commentData(Comment $comment): array
+{
+    return [
+        'id' => $comment->id,
+        'content' => $comment->content,
+        'author' => $comment->user->name,
+        'created_at' => $comment->created_at?->toIso8601String(),
+    ];
+}
+
 }
