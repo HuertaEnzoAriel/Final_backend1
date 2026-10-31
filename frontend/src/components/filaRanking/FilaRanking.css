@@ -1,16 +1,19 @@
 @reference "../../App.css";
 
 .fila-ranking {
-  @apply flex items-center gap-4 border-b border-borde py-5 last:border-0 md:gap-6;
+  @apply flex items-center gap-4 rounded-2xl border border-borde bg-fondo p-4 transition duration-300 hover:-translate-y-0.5 hover:border-acento/40 hover:shadow-lg hover:shadow-sombra/10 md:gap-6 md:p-5;
+}
+
+.fila-ranking + .fila-ranking {
+  @apply mt-4;
 }
 
 .fila-ranking__numero {
-  @apply w-12 shrink-0 font-titulo text-4xl leading-none font-black text-acento md:text-5xl;
+  @apply w-12 shrink-0 text-center font-titulo text-4xl leading-none font-black text-acento md:w-16 md:text-5xl;
 }
 
-/* La miniatura se oculta en móvil para dejar lugar al título. */
 .fila-ranking__imagen {
-  @apply hidden aspect-[16/10] w-36 shrink-0 overflow-hidden rounded-lg sm:block;
+  @apply hidden aspect-[16/10] w-40 shrink-0 overflow-hidden rounded-xl sm:block;
 }
 
 .fila-ranking__cuerpo {

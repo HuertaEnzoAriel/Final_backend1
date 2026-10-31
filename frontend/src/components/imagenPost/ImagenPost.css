@@ -5,5 +5,5 @@
 }
 
 .imagen-post--vacia {
-  @apply flex items-center justify-center bg-superficie font-titulo text-6xl font-black text-acento;
+  @apply flex items-center justify-center bg-gradient-to-br from-acento/20 to-superficie font-titulo text-6xl font-black text-acento;
 }

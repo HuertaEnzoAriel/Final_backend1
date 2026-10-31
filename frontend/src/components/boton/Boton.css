@@ -1,13 +1,13 @@
 @reference "../../App.css";
 
 .boton {
-  @apply inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  @apply inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.18em] uppercase transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
 }
 
 .boton--primario {
-  @apply bg-acento text-sobre-acento hover:bg-acento-hover;
+  @apply bg-acento text-sobre-acento shadow-md shadow-acento/25 hover:-translate-y-0.5 hover:bg-acento-hover;
 }
 
 .boton--secundario {
-  @apply border border-borde text-texto hover:border-acento hover:text-acento;
+  @apply border border-borde bg-fondo text-texto hover:border-acento hover:text-acento;
 }

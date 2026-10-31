@@ -5,5 +5,5 @@
 }
 
 .meta-post__autor {
-  @apply font-semibold text-texto;
+  @apply font-bold text-texto;
 }

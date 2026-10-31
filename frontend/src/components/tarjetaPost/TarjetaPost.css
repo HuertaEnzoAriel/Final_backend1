@@ -1,11 +1,23 @@
 @reference "../../App.css";
 
 .tarjeta {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-3 overflow-hidden rounded-2xl border border-borde bg-fondo pb-6 transition duration-300 hover:-translate-y-1 hover:border-acento/40 hover:shadow-xl hover:shadow-sombra/10;
+}
+
+.tarjeta > :not(.tarjeta__imagen) {
+  @apply px-5;
 }
 
 .tarjeta__imagen {
-  @apply mb-1 block aspect-[16/10] overflow-hidden rounded-lg;
+  @apply block aspect-[16/10] overflow-hidden;
+}
+
+.tarjeta__imagen .imagen-post {
+  @apply transition-transform duration-500 ease-out;
+}
+
+.tarjeta:hover .tarjeta__imagen .imagen-post {
+  @apply scale-105;
 }
 
 .tarjeta__titulo {
@@ -17,5 +29,5 @@
 }
 
 .tarjeta__numeros {
-  @apply text-xs font-semibold tracking-[0.14em] text-acento uppercase;
+  @apply mt-auto pt-2 text-xs font-semibold tracking-[0.14em] text-acento uppercase;
 }

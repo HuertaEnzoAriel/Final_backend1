@@ -5,31 +5,40 @@
 }
 
 .post__volver {
-  @apply text-sm text-texto-suave transition-colors hover:text-acento;
+  @apply w-fit rounded-full bg-superficie px-4 py-1.5 text-sm font-medium text-texto-suave transition-colors hover:text-acento;
 }
 
 .post__titulo {
-  @apply font-titulo text-4xl leading-tight font-black text-texto md:text-5xl;
+  @apply font-titulo text-4xl leading-tight font-black tracking-tight text-texto md:text-6xl;
 }
 
 .post__imagen {
-  @apply my-4 aspect-[16/9] overflow-hidden rounded-lg;
+  @apply my-4 aspect-[16/9] overflow-hidden rounded-3xl shadow-xl shadow-sombra/10;
 }
 
 .post__contenido {
-  @apply text-lg leading-relaxed whitespace-pre-line text-texto;
+  @apply text-xl leading-9 whitespace-pre-line text-texto;
+}
+
+.post__contenido::first-letter {
+  @apply float-left mt-1 mr-3 font-titulo text-7xl leading-[0.8] font-black text-acento;
 }
 
 .post__numeros {
-  @apply text-xs font-semibold tracking-[0.14em] text-acento uppercase;
+  @apply w-fit rounded-full bg-acento/10 px-3 py-1 text-xs font-semibold tracking-[0.14em] text-acento uppercase;
 }
 
 .post__seccion {
-  @apply mx-auto mt-12 flex max-w-3xl flex-col gap-4 border-t-4 border-texto pt-4;
+  @apply mx-auto mt-12 flex w-full max-w-3xl flex-col gap-4 rounded-3xl border border-borde bg-superficie p-6 md:p-8;
 }
 
 .post__subtitulo {
-  @apply font-titulo text-2xl font-bold text-texto;
+  @apply flex items-center gap-2 font-titulo text-2xl font-bold text-texto;
+}
+
+.post__subtitulo::before {
+  content: '';
+  @apply block h-5 w-1 rounded-full bg-acento;
 }
 
 .post__estrellas {
@@ -37,7 +46,7 @@
 }
 
 .post__estrella {
-  @apply cursor-pointer text-3xl text-borde transition-colors hover:text-acento;
+  @apply cursor-pointer text-3xl text-borde transition hover:scale-110 hover:text-acento;
 }
 
 .post__estrella--activa {
@@ -58,7 +67,7 @@
 }
 
 .post__textarea {
-  @apply w-full rounded-lg border border-borde bg-superficie p-3 text-texto focus:border-acento focus:outline-none;
+  @apply w-full rounded-xl border border-borde bg-fondo p-4 text-texto transition-colors focus:border-acento focus:ring-2 focus:ring-acento/30 focus:outline-none;
 }
 
 .post__error {
@@ -66,9 +75,9 @@
 }
 
 .post__comentarios {
-  @apply flex flex-col gap-6;
+  @apply flex flex-col gap-4;
 }
 
 .post__comentario {
-  @apply flex flex-col gap-1 border-b border-borde pb-4 text-texto;
+  @apply flex flex-col gap-1 rounded-xl bg-fondo p-4 text-texto;
 }

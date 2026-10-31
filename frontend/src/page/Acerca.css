@@ -1,15 +1,20 @@
 @reference "../App.css";
 
 .acerca {
-  @apply flex max-w-3xl flex-col gap-5;
+  @apply mx-auto flex max-w-3xl flex-col gap-5;
 }
 
 .acerca__parrafo {
-  @apply text-lg leading-relaxed text-texto;
+  @apply text-lg leading-8 text-texto;
 }
 
 .acerca__subtitulo {
-  @apply mt-6 font-titulo text-2xl font-black text-texto;
+  @apply mt-8 flex items-center gap-3 font-titulo text-2xl font-black text-texto;
+}
+
+.acerca__subtitulo::before {
+  content: '';
+  @apply block h-6 w-1.5 rounded-full bg-acento;
 }
 
 .acerca__roles {
@@ -17,15 +22,15 @@
 }
 
 .acerca__rol {
-  @apply rounded-lg border border-borde bg-superficie p-5;
+  @apply rounded-2xl border border-borde bg-superficie p-6 transition duration-300 hover:-translate-y-0.5 hover:border-acento/40 hover:shadow-lg hover:shadow-sombra/10;
 }
 
 .acerca__rol-nombre {
-  @apply text-xs font-semibold tracking-[0.18em] text-acento uppercase;
+  @apply text-xs font-bold tracking-[0.18em] text-acento uppercase;
 }
 
 .acerca__rol-texto {
-  @apply mt-2 text-texto-suave;
+  @apply mt-2 leading-relaxed text-texto-suave;
 }
 
 .acerca__enlaces {
@@ -33,5 +38,5 @@
 }
 
 .acerca__enlace {
-  @apply rounded-full bg-acento px-6 py-3 text-xs font-semibold tracking-[0.18em] text-sobre-acento uppercase transition-colors hover:bg-acento-hover;
+  @apply rounded-full bg-acento px-6 py-3 text-xs font-semibold tracking-[0.18em] text-sobre-acento uppercase shadow-lg shadow-acento/30 transition hover:-translate-y-0.5 hover:bg-acento-hover;
 }

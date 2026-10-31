@@ -1,13 +1,18 @@
 @reference "../../App.css";
 
 .encabezado-seccion {
-  @apply mb-10 border-t-4 border-texto pt-4;
+  @apply mb-12 rounded-3xl bg-superficie px-6 py-10 text-center md:px-12 md:py-14;
 }
 
 .encabezado-seccion__titulo {
-  @apply font-titulo text-4xl font-black text-texto md:text-5xl;
+  @apply font-titulo text-4xl font-black tracking-tight text-texto md:text-6xl;
+}
+
+.encabezado-seccion__titulo::after {
+  content: '';
+  @apply mx-auto mt-5 block h-1 w-16 rounded-full bg-acento;
 }
 
 .encabezado-seccion__bajada {
-  @apply mt-3 max-w-2xl text-lg text-texto-suave;
+  @apply mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-texto-suave;
 }

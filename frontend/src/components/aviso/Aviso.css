@@ -1,9 +1,9 @@
 @reference "../../App.css";
 
 .aviso {
-  @apply flex flex-col items-start gap-4 rounded-lg border border-borde bg-superficie p-6 text-texto-suave;
+  @apply flex flex-col items-start gap-4 rounded-2xl border border-dashed border-borde bg-superficie p-8 text-texto-suave;
 }
 
 .aviso--error {
-  @apply border-peligro text-peligro;
+  @apply border-peligro bg-peligro/5 text-peligro;
 }

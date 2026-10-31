@@ -1,9 +1,14 @@
 @reference "../../App.css";
 
 .panel {
-  @apply border-t-4 border-texto pt-4;
+  @apply rounded-2xl border border-borde bg-superficie p-6;
 }
 
 .panel__titulo {
-  @apply mb-4 font-titulo text-xl font-bold text-texto;
+  @apply mb-4 flex items-center gap-2 font-titulo text-xl font-bold text-texto;
+}
+
+.panel__titulo::before {
+  content: '';
+  @apply block h-5 w-1 rounded-full bg-acento;
 }

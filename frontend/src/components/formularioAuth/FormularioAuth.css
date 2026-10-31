@@ -1,11 +1,11 @@
 @reference "../../App.css";
 
 .form-auth {
-  @apply mx-auto flex max-w-md flex-col gap-8 py-8;
+  @apply mx-auto flex max-w-md flex-col gap-8 rounded-3xl border border-borde bg-superficie p-8 shadow-xl shadow-sombra/5 md:p-10;
 }
 
 .form-auth__titulo {
-  @apply font-titulo text-5xl font-black text-texto;
+  @apply font-titulo text-4xl font-black tracking-tight text-texto;
 }
 
 .form-auth__bajada {

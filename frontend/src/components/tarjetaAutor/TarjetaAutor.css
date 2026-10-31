@@ -1,7 +1,7 @@
 @reference "../../App.css";
 
 .tarjeta-autor {
-  @apply flex flex-col gap-5 rounded-lg border border-borde bg-superficie p-6;
+  @apply flex flex-col gap-5 rounded-2xl border border-borde bg-fondo p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sombra/10;
 }
 
 .tarjeta-autor__cabecera {
@@ -9,7 +9,7 @@
 }
 
 .tarjeta-autor__avatar {
-  @apply grid size-14 shrink-0 place-items-center rounded-full bg-acento font-titulo text-2xl font-black text-sobre-acento;
+  @apply grid size-16 shrink-0 place-items-center rounded-full bg-gradient-to-br from-acento to-acento-hover font-titulo text-2xl font-black text-sobre-acento shadow-lg shadow-acento/30;
 }
 
 .tarjeta-autor__nombre {
@@ -21,7 +21,7 @@
 }
 
 .tarjeta-autor__posts {
-  @apply flex flex-col border-t border-borde;
+  @apply flex flex-col rounded-xl bg-superficie px-4 py-1;
 }
 
 .tarjeta-autor__item {
@@ -29,5 +29,5 @@
 }
 
 .tarjeta-autor__post {
-  @apply block py-2 text-texto transition-colors hover:text-acento;
+  @apply block py-2.5 text-sm font-medium text-texto transition-colors hover:text-acento;
 }

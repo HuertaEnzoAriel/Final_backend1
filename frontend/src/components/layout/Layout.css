@@ -5,5 +5,5 @@
 }
 
 .layout__contenido {
-  @apply mx-auto w-full max-w-6xl flex-1 px-4 py-10;
+  @apply mx-auto w-full max-w-6xl flex-1 px-4 py-12 md:py-16;
 }

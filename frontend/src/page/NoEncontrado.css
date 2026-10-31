@@ -1,11 +1,11 @@
 @reference "../App.css";
 
 .no-encontrado {
-  @apply mx-auto flex max-w-xl flex-col items-center gap-4 py-20 text-center;
+  @apply mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl bg-superficie px-6 py-20 text-center;
 }
 
 .no-encontrado__codigo {
-  @apply font-titulo text-8xl font-black text-acento;
+  @apply bg-gradient-to-br from-acento to-acento-hover bg-clip-text font-titulo text-9xl font-black text-transparente;
 }
 
 .no-encontrado__titulo {
@@ -17,5 +17,5 @@
 }
 
 .no-encontrado__enlace {
-  @apply mt-2 rounded-full bg-acento px-6 py-3 text-xs font-semibold tracking-[0.18em] text-sobre-acento uppercase transition-colors hover:bg-acento-hover;
+  @apply mt-2 rounded-full bg-acento px-6 py-3 text-xs font-semibold tracking-[0.18em] text-sobre-acento uppercase shadow-lg shadow-acento/30 transition hover:-translate-y-0.5 hover:bg-acento-hover;
 }
