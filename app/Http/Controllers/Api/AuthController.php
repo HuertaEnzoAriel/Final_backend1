@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -81,4 +82,24 @@ class AuthController extends Controller
             'role' => $user->role,
         ];
     }
+    public function show(Request $request, Post $post): JsonResponse
+{
+    abort_unless($post->isPublished(), 404);
+
+    $post->load(['user:id,name', 'comments' => fn ($query) => $query->with('user:id,name')->latest()])
+        ->loadCount(['comments', 'ratings'])
+        ->loadAvg('ratings', 'score');
+
+    $user = $request->user('sanctum');
+
+    return response()->json([
+        'post' => [
+            ...$this->summary($post),
+            'content' => $post->content,
+            'ratings_count' => $post->ratings_count,
+        ],
+        'comments' => $post->comments->map(fn (Comment $comment) => $this->commentData($comment)),
+        'my_rating' => $user ? $post->ratings()->where('user_id', $user->id)->value('score') : null,
+    ]);
+}
 }
