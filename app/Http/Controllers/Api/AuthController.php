@@ -132,5 +132,14 @@ public function rate(Request $request, Post $post): JsonResponse
 
     return response()->json(['score' => $validated['score']]);
 }
+private function commentData(Comment $comment): array
+{
+    return [
+        'id' => $comment->id,
+        'content' => $comment->content,
+        'author' => $comment->user->name,
+        'created_at' => $comment->created_at?->toIso8601String(),
+    ];
+}
 
 }
