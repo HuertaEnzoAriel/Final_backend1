@@ -7,4 +7,8 @@ export const ENDPOINTS = {
   LOGIN: '/login',
   REGISTRO: '/register',
   LOGOUT: '/logout',
+  POST: '/posts/:id',
+  COMENTARIOS: '/posts/:id/comments',
+  CALIFICACIONES: '/posts/:id/ratings',
 }
+export const conId = (endpoint, id) => endpoint.replace(':id', String(id))
