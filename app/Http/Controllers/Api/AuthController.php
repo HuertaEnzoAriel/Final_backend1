@@ -117,4 +117,20 @@ public function comment(Request $request, Post $post): JsonResponse
 
     return response()->json(['comment' => $this->commentData($comment->load('user:id,name'))], 201);
 }
+public function rate(Request $request, Post $post): JsonResponse
+{
+    abort_unless($post->isPublished(), 404);
+
+    $validated = $request->validate([
+        'score' => ['required', 'integer', 'between:1,5'],
+    ]);
+
+    Rating::updateOrCreate(
+        ['post_id' => $post->id, 'user_id' => $request->user()->id],
+        ['score' => $validated['score']],
+    );
+
+    return response()->json(['score' => $validated['score']]);
+}
+
 }
