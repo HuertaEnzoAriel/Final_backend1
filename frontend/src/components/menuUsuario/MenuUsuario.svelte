@@ -6,12 +6,21 @@
   import { salir } from '../../services/auth.js'
   import { ENLACES_CUENTA, puedeVer } from '../../models/navegacion/enlaces.js'
   import { RUTAS } from '../../models/rutas/rutas.js'
+  import { ROLES_PUBLICAN } from '../../models/roles/roles.js'
+  import { actividad, refrescarNoVistos } from '../../state/actividad.svelte.js'
 
   let abierto = $state(false)
   /** @type {HTMLElement | undefined} */
   let contenedor = $state()
 
   let enlaces = $derived(ENLACES_CUENTA.filter((enlace) => puedeVer(enlace, sesion.usuario)))
+
+  // Solo quienes publican reciben actividad. Se consulta al entrar y al volver a la pestaña.
+  let recibeActividad = $derived(!!sesion.usuario && ROLES_PUBLICAN.includes(sesion.usuario.role))
+  $effect(() => {
+    if (recibeActividad) refrescarNoVistos()
+    else actividad.noVistos = 0
+  })
 
   // Cierra el menú al hacer clic fuera de él (apunte §10.1).
   /** @param {MouseEvent} event */
@@ -31,7 +40,11 @@
   }
 </script>
 
-<svelte:window onclick={alClicVentana} onkeydown={alTeclaVentana} />
+<svelte:window
+  onclick={alClicVentana}
+  onkeydown={alTeclaVentana}
+  onfocus={() => recibeActividad && refrescarNoVistos()}
+/>
 
 <div class="menu-usuario" bind:this={contenedor}>
   <button
@@ -48,6 +61,11 @@
       <circle cx="12" cy="8" r="4" />
       <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
     </svg>
+    {#if actividad.noVistos > 0}
+      <span class="menu-usuario__badge" aria-label="{actividad.noVistos} novedades sin ver">
+        {actividad.noVistos > 9 ? '9+' : actividad.noVistos}
+      </span>
+    {/if}
   </button>
 
   <!-- Entra creciendo desde la esquina del botón y sale con fade (apunte §9.5). -->
@@ -65,6 +83,9 @@
       {#each enlaces as enlace (enlace.ruta)}
         <a class="menu-usuario__enlace" role="menuitem" href={'#' + enlace.ruta} onclick={() => (abierto = false)}>
           {enlace.texto}
+          {#if enlace.ruta === RUTAS.ACTIVIDAD && actividad.noVistos > 0}
+            <span class="menu-usuario__contador">{actividad.noVistos}</span>
+          {/if}
         </a>
       {/each}
 

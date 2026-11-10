@@ -1,0 +1,37 @@
+@reference "../App.css";
+
+.actividad__resumen {
+  @apply mb-6 grid grid-cols-3 gap-3;
+}
+
+.actividad__dato {
+  @apply rounded-2xl border border-borde bg-superficie p-4 text-center;
+}
+
+.actividad__dato dt {
+  @apply text-[10px] font-semibold tracking-[0.14em] text-texto-suave uppercase md:text-xs;
+}
+
+.actividad__dato dd {
+  @apply mt-1 font-titulo text-2xl font-black text-acento md:text-3xl;
+}
+
+.actividad__filtros {
+  @apply mb-5 flex flex-wrap gap-2;
+}
+
+.actividad__filtro {
+  @apply cursor-pointer rounded-full border border-borde px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-texto-suave uppercase transition-colors hover:border-acento hover:text-acento;
+}
+
+.actividad__filtro--activo {
+  @apply border-acento bg-acento text-sobre-acento hover:text-sobre-acento;
+}
+
+.actividad__lista {
+  @apply flex flex-col gap-3;
+}
+
+.actividad__mas {
+  @apply mx-auto mt-6 block cursor-pointer rounded-full border border-borde px-6 py-2 text-xs font-semibold tracking-[0.18em] text-texto uppercase transition-colors hover:border-acento hover:text-acento disabled:cursor-wait disabled:opacity-60;
+}

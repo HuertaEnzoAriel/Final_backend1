@@ -30,6 +30,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'requested_editor_at' => 'datetime',
+            'activity_seen_at' => 'datetime',
         ];
     }
 

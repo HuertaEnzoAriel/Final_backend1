@@ -65,4 +65,31 @@
  * @typedef {{ authors: Autor[] }} RespuestaAutores
  */
 
+/**
+ * @typedef {{
+ *   type: 'comment' | 'rating',
+ *   id: number,
+ *   post_id: number,
+ *   post_title: string | null,
+ *   author: string | null,
+ *   content: string | null,
+ *   score: number | null,
+ *   created_at: string,
+ *   is_new: boolean,
+ * }} ItemActividad
+ */
+
+/**
+ * @typedef {{ data: ItemActividad[], next_before: string | null }} RespuestaActividad
+ */
+
+/**
+ * @typedef {{
+ *   unread: number,
+ *   comments_total: number,
+ *   ratings_total: number,
+ *   average: number,
+ * }} ResumenActividad
+ */
+
 export {}

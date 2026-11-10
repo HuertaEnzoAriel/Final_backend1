@@ -4,9 +4,17 @@
   @apply relative;
 }
 
+.menu-usuario__badge {
+  @apply absolute -top-1.5 -right-1.5 grid min-w-4.5 place-items-center rounded-full bg-acento px-1 text-[10px] leading-4.5 font-bold text-sobre-acento;
+}
+
+.menu-usuario__contador {
+  @apply ml-2 rounded-full bg-acento px-1.5 py-0.5 text-[10px] font-bold tracking-normal text-sobre-acento;
+}
+
 /* Mismo aspecto que el botón de tema. */
 .menu-usuario__boton {
-  @apply grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition duration-200 hover:scale-110 hover:border-acento hover:text-acento active:scale-90;
+  @apply relative grid size-9 cursor-pointer place-items-center rounded-full border border-borde text-texto transition duration-200 hover:scale-110 hover:border-acento hover:text-acento active:scale-90;
 }
 
 .menu-usuario__boton--abierto {

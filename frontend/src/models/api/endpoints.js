@@ -12,5 +12,8 @@ export const ENDPOINTS = {
   CALIFICACIONES: '/posts/:id/ratings',
   COMENTARIO: '/comments/:id',
   RESPUESTA: '/comments/:id/reply',
+  ACTIVIDAD: '/me/activity',
+  ACTIVIDAD_RESUMEN: '/me/activity/summary',
+  ACTIVIDAD_VISTA: '/me/activity/seen',
 }
 export const conId = (endpoint, id) => endpoint.replace(':id', String(id))

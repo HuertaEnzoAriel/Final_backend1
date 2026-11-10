@@ -8,6 +8,7 @@
   import Acerca from '../../page/Acerca.svelte'
   import { RUTAS } from '../../models/rutas/rutas.js'
   import Posts from '../../page/Posts.svelte'
+  import Actividad from '../../page/Actividad.svelte'
 
   // Tabla de páginas: { ruta, componente }. Se completa al migrar cada vista.
   // Una ruta puede tener parámetros, p. ej. '/posts/:id'.
@@ -20,6 +21,7 @@
     { ruta: RUTAS.AUTORES, componente: Autores },
     { ruta: RUTAS.ACERCA, componente: Acerca },
     { ruta: RUTAS.POST, componente: Posts },
+    { ruta: RUTAS.ACTIVIDAD, componente: Actividad },
   ]
 
   let hash = $state(window.location.hash)
