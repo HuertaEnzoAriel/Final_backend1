@@ -10,5 +10,7 @@ export const ENDPOINTS = {
   POST: '/posts/:id',
   COMENTARIOS: '/posts/:id/comments',
   CALIFICACIONES: '/posts/:id/ratings',
+  COMENTARIO: '/comments/:id',
+  RESPUESTA: '/comments/:id/reply',
 }
 export const conId = (endpoint, id) => endpoint.replace(':id', String(id))

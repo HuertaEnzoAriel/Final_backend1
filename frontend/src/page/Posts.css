@@ -81,3 +81,27 @@
 .post__comentario {
   @apply flex flex-col gap-1 rounded-xl bg-fondo p-4 text-texto;
 }
+
+.post__comentario-acciones {
+  @apply mt-2 flex flex-wrap items-center gap-2;
+}
+
+.post__accion {
+  @apply cursor-pointer rounded-full px-3 py-1 text-sm font-medium text-texto-suave transition-colors hover:bg-acento/10 hover:text-acento;
+}
+
+.post__accion--peligro {
+  @apply hover:bg-peligro/10 hover:text-peligro;
+}
+
+.post__respuesta {
+  @apply mt-3 ml-4 flex flex-col gap-1 rounded-xl border-l-4 border-acento bg-superficie p-3 md:ml-8;
+}
+
+.post__respuesta-etiqueta {
+  @apply w-fit rounded-full bg-acento/10 px-2 py-0.5 text-xs font-semibold tracking-[0.14em] text-acento uppercase;
+}
+
+.post__respuesta-form {
+  @apply mt-3 ml-4 md:ml-8;
+}

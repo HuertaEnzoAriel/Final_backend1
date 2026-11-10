@@ -81,6 +81,70 @@
       enviando = false
     }
   }
+
+  // Solo el dueño del post responde y modera (el backend lo vuelve a validar).
+  let esDueno = $derived(!!sesion.usuario && sesion.usuario.id === post?.author_id)
+
+  let respondiendoA = $state(/** @type {number | null} */ (null))
+  let textoRespuesta = $state('')
+  let enviandoRespuesta = $state(false)
+  let errorRespuesta = $state('')
+  let errorEliminar = $state('')
+
+  /** @param {number} id */
+  function abrirRespuesta(id) {
+    respondiendoA = id
+    textoRespuesta = ''
+    errorRespuesta = ''
+  }
+
+  function cerrarRespuesta() {
+    respondiendoA = null
+    textoRespuesta = ''
+    errorRespuesta = ''
+  }
+
+  /**
+   * @param {SubmitEvent} event
+   * @param {number} id
+   */
+  async function responder(event, id) {
+    event.preventDefault()
+    enviandoRespuesta = true
+    errorRespuesta = ''
+    try {
+      await pedir(conId(ENDPOINTS.RESPUESTA, id), { metodo: 'POST', datos: { reply: textoRespuesta } })
+      cerrarRespuesta()
+      await refrescar()
+    } catch (e) {
+      errorRespuesta = /** @type {{ errores?: Record<string, string[]> }} */ (e).errores?.reply?.[0] ?? POST.ERROR_ENVIO
+    } finally {
+      enviandoRespuesta = false
+    }
+  }
+
+  /** @param {number} id */
+  async function quitarRespuesta(id) {
+    errorEliminar = ''
+    try {
+      await pedir(conId(ENDPOINTS.RESPUESTA, id), { metodo: 'DELETE' })
+      await refrescar()
+    } catch {
+      errorEliminar = POST.ERROR_ELIMINAR
+    }
+  }
+
+  /** @param {number} id */
+  async function eliminarComentario(id) {
+    if (!confirm(POST.CONFIRMAR_ELIMINAR)) return
+    errorEliminar = ''
+    try {
+      await pedir(conId(ENDPOINTS.COMENTARIO, id), { metodo: 'DELETE' })
+      await refrescar()
+    } catch {
+      errorEliminar = POST.ERROR_ELIMINAR
+    }
+  }
 </script>
 
 {#if estado.cargando}
@@ -153,11 +217,64 @@
       </form>
     {/if}
 
+    {#if errorEliminar}
+      <p class="post__error">{errorEliminar}</p>
+    {/if}
+
     <div class="post__comentarios">
       {#each comentarios as c (c.id)}
         <article class="post__comentario">
           <MetaPost autor={c.author} fecha={c.created_at} />
           <p>{c.content}</p>
+
+          {#if c.reply}
+            <div class="post__respuesta">
+              <span class="post__respuesta-etiqueta">{POST.ETIQUETA_AUTOR}</span>
+              <MetaPost autor={post.author} fecha={c.reply_at} />
+              <p>{c.reply}</p>
+              {#if esDueno}
+                <div class="post__comentario-acciones">
+                  <button type="button" class="post__accion" onclick={() => quitarRespuesta(c.id)}>
+                    {POST.ELIMINAR_RESPUESTA}
+                  </button>
+                </div>
+              {/if}
+            </div>
+          {:else if esDueno && respondiendoA === c.id}
+            <form class="post__form post__respuesta-form" onsubmit={(e) => responder(e, c.id)}>
+              <textarea
+                class="post__textarea"
+                rows="3"
+                minlength="2"
+                maxlength="1000"
+                required
+                placeholder={POST.PLACEHOLDER_RESPUESTA}
+                bind:value={textoRespuesta}
+              ></textarea>
+              {#if errorRespuesta}
+                <p class="post__error">{errorRespuesta}</p>
+              {/if}
+              <div class="post__comentario-acciones">
+                <Boton type="submit" disabled={enviandoRespuesta}>
+                  {enviandoRespuesta ? POST.ENVIANDO : POST.BOTON_RESPONDER}
+                </Boton>
+                <Boton variante="secundario" onclick={cerrarRespuesta}>{POST.CANCELAR}</Boton>
+              </div>
+            </form>
+          {/if}
+
+          {#if esDueno && !(respondiendoA === c.id && !c.reply)}
+            <div class="post__comentario-acciones">
+              {#if !c.reply}
+                <button type="button" class="post__accion" onclick={() => abrirRespuesta(c.id)}>
+                  {POST.RESPONDER}
+                </button>
+              {/if}
+              <button type="button" class="post__accion post__accion--peligro" onclick={() => eliminarComentario(c.id)}>
+                {POST.ELIMINAR}
+              </button>
+            </div>
+          {/if}
         </article>
       {:else}
         <Aviso texto={POST.SIN_COMENTARIOS} />

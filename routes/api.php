@@ -19,6 +19,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/posts/{post}/comments', [PostController::class, 'comment']);
     Route::post('/posts/{post}/ratings', [PostController::class, 'rate']);
+    Route::post('/comments/{comment}/reply', [PostController::class, 'reply'])->whereNumber('comment');
+    Route::delete('/comments/{comment}/reply', [PostController::class, 'destroyReply'])->whereNumber('comment');
+    Route::delete('/comments/{comment}', [PostController::class, 'destroyComment'])->whereNumber('comment');
 });
 
 Route::get('/user', function (Request $request) {

@@ -8,9 +8,29 @@
  *   image_url: string | null,
  *   published_at: string | null,
  *   author: string,
+ *   author_id: number,
  *   comments_count: number,
  *   rating_avg: number,
  * }} PostResumen
+ */
+
+/**
+ * @typedef {{
+ *   id: number,
+ *   content: string,
+ *   author: string,
+ *   created_at: string | null,
+ *   reply: string | null,
+ *   reply_at: string | null,
+ * }} Comentario
+ */
+
+/**
+ * @typedef {{
+ *   post: PostResumen & { content: string, ratings_count: number },
+ *   comments: Comentario[],
+ *   my_rating: number | null,
+ * }} RespuestaPost
  */
 
 /**

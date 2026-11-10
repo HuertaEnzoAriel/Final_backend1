@@ -101,6 +101,7 @@ class PostController extends Controller
             'image_url' => $post->image_path ? asset('storage/' . $post->image_path) : null,
             'published_at' => $post->published_at?->toIso8601String(),
             'author' => $post->user->name,
+            'author_id' => $post->user_id,
             'comments_count' => $post->comments_count,
             'rating_avg' => round((float) ($post->ratings_avg_score ?? 0), 1),
         ];
@@ -155,6 +156,47 @@ public function rate(Request $request, Post $post): JsonResponse
 
     return response()->json(['score' => $validated['score']]);
 }
+// Solo el dueño del post responde a los comentarios (ni siquiera un admin).
+public function reply(Request $request, Comment $comment): JsonResponse
+{
+    $this->assertPostOwner($request, $comment);
+
+    $validated = $request->validate([
+        'reply' => ['required', 'string', 'min:2', 'max:1000'],
+    ]);
+
+    $comment->update([
+        'reply' => $validated['reply'],
+        'reply_at' => now(),
+    ]);
+
+    return response()->json(['comment' => $this->commentData($comment->load('user:id,name'))]);
+}
+// El dueño del post borra comentarios no deseados (la respuesta se va con el comentario).
+public function destroyComment(Request $request, Comment $comment): JsonResponse
+{
+    $this->assertPostOwner($request, $comment, false);
+
+    $comment->delete();
+
+    return response()->json(null, 204);
+}
+// Solo borra la respuesta del dueño; el comentario queda.
+public function destroyReply(Request $request, Comment $comment): JsonResponse
+{
+    $this->assertPostOwner($request, $comment, false);
+
+    $comment->update(['reply' => null, 'reply_at' => null]);
+
+    return response()->json(['comment' => $this->commentData($comment->load('user:id,name'))]);
+}
+private function assertPostOwner(Request $request, Comment $comment, bool $requirePublished = true): void
+{
+    $post = $comment->post;
+
+    abort_unless($request->user()->id === $post->user_id, 403);
+    abort_if($requirePublished && ! $post->isPublished(), 404);
+}
 private function commentData(Comment $comment): array
 {
     return [
@@ -162,6 +204,8 @@ private function commentData(Comment $comment): array
         'content' => $comment->content,
         'author' => $comment->user->name,
         'created_at' => $comment->created_at?->toIso8601String(),
+        'reply' => $comment->reply,
+        'reply_at' => $comment->reply_at?->toIso8601String(),
     ];
 }
 

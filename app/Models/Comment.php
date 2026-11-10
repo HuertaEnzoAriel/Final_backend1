@@ -18,6 +18,12 @@ class Comment extends Model
         'post_id',
         'user_id',
         'content',
+        'reply',
+        'reply_at',
+    ];
+
+    protected $casts = [
+        'reply_at' => 'datetime',
     ];
 
     public function post(): BelongsTo
