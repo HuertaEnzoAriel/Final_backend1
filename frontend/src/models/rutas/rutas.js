@@ -7,6 +7,7 @@ export const RUTAS = {
   LOGIN: '/login',
   REGISTRO: '/registro',
   DASHBOARD: '/dashboard',
+  ACTIVIDAD: '/actividad',
   PUBLICAR: '/posts/nuevo',
   POST: '/posts/:id',
   MODERACION: '/admin/moderacion',

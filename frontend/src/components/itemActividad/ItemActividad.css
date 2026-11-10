@@ -1,0 +1,41 @@
+@reference "../../App.css";
+
+.item-actividad {
+  @apply rounded-2xl border border-borde bg-fondo transition duration-300 hover:border-acento/40 hover:shadow-lg hover:shadow-sombra/10;
+}
+
+.item-actividad--nuevo {
+  @apply border-l-4 border-l-acento bg-superficie;
+}
+
+.item-actividad__enlace {
+  @apply flex flex-col gap-1 p-4 md:p-5;
+}
+
+.item-actividad__linea {
+  @apply text-sm text-texto-suave;
+}
+
+.item-actividad__linea strong {
+  @apply font-semibold text-texto;
+}
+
+.item-actividad__linea em {
+  @apply font-titulo text-texto not-italic font-bold;
+}
+
+.item-actividad__estrellas {
+  @apply text-acento;
+}
+
+.item-actividad__etiqueta {
+  @apply ml-2 rounded-full bg-acento px-2 py-0.5 text-[10px] font-bold tracking-[0.14em] text-sobre-acento uppercase;
+}
+
+.item-actividad__texto {
+  @apply line-clamp-3 text-texto;
+}
+
+.item-actividad__fecha {
+  @apply text-xs text-texto-suave;
+}

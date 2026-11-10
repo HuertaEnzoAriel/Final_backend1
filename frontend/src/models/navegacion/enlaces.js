@@ -21,6 +21,7 @@ export const ENLACES_CUENTA = [
   { texto: 'Entrar', ruta: RUTAS.LOGIN, acceso: ACCESO.INVITADO },
   { texto: 'Crear cuenta', ruta: RUTAS.REGISTRO, acceso: ACCESO.INVITADO },
   { texto: 'Publicar', ruta: RUTAS.PUBLICAR, acceso: ACCESO.USUARIO, roles: ROLES_PUBLICAN },
+  { texto: 'Actividad', ruta: RUTAS.ACTIVIDAD, acceso: ACCESO.USUARIO, roles: ROLES_PUBLICAN },
   { texto: 'Dashboard', ruta: RUTAS.DASHBOARD, acceso: ACCESO.USUARIO },
   { texto: 'Moderación', ruta: RUTAS.MODERACION, acceso: ACCESO.USUARIO, roles: [ROLES.ADMIN] },
 ]
