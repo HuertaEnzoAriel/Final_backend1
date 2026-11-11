@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Rating;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -125,6 +126,91 @@ class PostController extends Controller
         'comments' => $post->comments->map(fn (Comment $comment) => $this->commentData($comment)),
         'my_rating' => $user ? $post->ratings()->where('user_id', $user->id)->value('score') : null,
     ]);
+}
+// Solo admin y editor crean posts. Quedan pendientes hasta que un admin los apruebe.
+public function store(Request $request): JsonResponse
+{
+    abort_unless($request->user()->canPublish(), 403);
+
+    $validated = $request->validate([
+        'title' => ['required', 'string', 'max:180'],
+        'content' => ['required', 'string', 'min:20'],
+        'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+    ]);
+
+    $post = Post::create([
+        'user_id' => $request->user()->id,
+        'title' => $validated['title'],
+        'content' => $validated['content'],
+        'image_path' => $request->hasFile('image') ? $request->file('image')->store('posts', 'public') : null,
+        'is_published' => Post::STATUS_DRAFT,
+        'published_at' => null,
+    ]);
+
+    return response()->json(['id' => $post->id, 'status' => 'pending'], 201);
+}
+// Dashboard: los posts del usuario con su estado, métricas y si ya pidió ser editor.
+public function mine(Request $request): JsonResponse
+{
+    $user = $request->user();
+
+    $posts = Post::query()
+        ->where('user_id', $user->id)
+        ->withCount(['comments', 'ratings'])
+        ->withAvg('ratings', 'score')
+        ->latest()
+        ->get();
+
+    $rated = $posts->filter(fn (Post $post) => $post->ratings_count > 0);
+
+    return response()->json([
+        'posts' => $posts->map(fn (Post $post) => [
+            'id' => $post->id,
+            'title' => $post->title,
+            'status' => match (true) {
+                $post->isPublished() => 'published',
+                $post->isRejected() => 'rejected',
+                default => 'pending',
+            },
+            'rejection_reason' => $post->isRejected() ? $post->rejection_reason : null,
+            'published_at' => $post->published_at?->toIso8601String(),
+            'created_at' => $post->created_at?->toIso8601String(),
+            'comments_count' => $post->comments_count,
+            'rating_avg' => round((float) ($post->ratings_avg_score ?? 0), 1),
+        ]),
+        'stats' => [
+            'total_posts' => $posts->count(),
+            'published_posts' => $posts->filter(fn (Post $post) => $post->isPublished())->count(),
+            'total_comments' => $posts->sum('comments_count'),
+            'average_rating' => $rated->isNotEmpty() ? round((float) $rated->avg('ratings_avg_score'), 1) : 0,
+        ],
+        'requested_editor' => $user->requested_editor_at !== null,
+    ]);
+}
+// El dueño (o un admin) elimina un post y su imagen.
+public function destroy(Request $request, Post $post): JsonResponse
+{
+    abort_unless($request->user()->id === $post->user_id || $request->user()->isAdmin(), 403);
+
+    if ($post->image_path) {
+        Storage::disk('public')->delete($post->image_path);
+    }
+
+    $post->delete();
+
+    return response()->json(null, 204);
+}
+// Un usuario común pide el rol de editor; el admin lo ve en moderación.
+public function requestEditor(Request $request): JsonResponse
+{
+    $user = $request->user();
+    abort_if($user->canPublish(), 409, 'Ya tenés permisos para publicar.');
+
+    if (! $user->requested_editor_at) {
+        $user->update(['requested_editor_at' => now()]);
+    }
+
+    return response()->json(['requested' => true]);
 }
 public function comment(Request $request, Post $post): JsonResponse
 {

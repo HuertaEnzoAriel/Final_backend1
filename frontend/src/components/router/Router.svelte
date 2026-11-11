@@ -9,6 +9,9 @@
   import { RUTAS } from '../../models/rutas/rutas.js'
   import Posts from '../../page/Posts.svelte'
   import Actividad from '../../page/Actividad.svelte'
+  import Publicar from '../../page/Publicar.svelte'
+  import Moderacion from '../../page/Moderacion.svelte'
+  import Dashboard from '../../page/Dashboard.svelte'
 
   // Tabla de páginas: { ruta, componente }. Se completa al migrar cada vista.
   // Una ruta puede tener parámetros, p. ej. '/posts/:id'.
@@ -20,6 +23,9 @@
     { ruta: RUTAS.RANKING, componente: Ranking },
     { ruta: RUTAS.AUTORES, componente: Autores },
     { ruta: RUTAS.ACERCA, componente: Acerca },
+    { ruta: RUTAS.PUBLICAR, componente: Publicar },
+    { ruta: RUTAS.MODERACION, componente: Moderacion },
+    { ruta: RUTAS.DASHBOARD, componente: Dashboard },
     { ruta: RUTAS.POST, componente: Posts },
     { ruta: RUTAS.ACTIVIDAD, componente: Actividad },
   ]

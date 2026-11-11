@@ -1,0 +1,21 @@
+// Textos fijos de la página de moderación.
+export const MODERACION = {
+  TITULO: 'Moderación',
+  BAJADA: 'Posts pendientes de revisión. Aprobalos para publicarlos o rechazalos indicando el motivo.',
+  CARGANDO: 'Cargando pendientes…',
+  ERROR_CARGA: 'No se pudieron cargar los pendientes.',
+  SIN_PENDIENTES: 'No hay posts pendientes. ¡Todo al día!',
+  SIN_PERMISO: 'Solo los administradores pueden moderar.',
+  APROBAR: 'Aprobar',
+  RECHAZAR: 'Rechazar',
+  CONFIRMAR_RECHAZO: 'Confirmar rechazo',
+  CANCELAR: 'Cancelar',
+  MOTIVO: 'Motivo del rechazo (máx. 500 caracteres)',
+  TITULO_USUARIOS: 'Usuarios y roles',
+  BAJADA_USUARIOS: 'Cambiá el rol de un usuario. Quien lo recibe verá un aviso en su actividad.',
+  CARGANDO_USUARIOS: 'Cargando usuarios…',
+  ERROR_USUARIOS: 'No se pudieron cargar los usuarios.',
+  SOLICITO: 'Pidió ser editor',
+  TU_CUENTA: 'Vos',
+  ERROR_ACCION: 'No se pudo completar la acción. Probá de nuevo.',
+}

@@ -5,5 +5,12 @@ export const ROLES = {
   USUARIO: 'user',
 }
 
+// Nombre legible de cada rol.
+export const ETIQUETAS_ROL = {
+  [ROLES.ADMIN]: 'Administrador',
+  [ROLES.EDITOR]: 'Editor',
+  [ROLES.USUARIO]: 'Usuario',
+}
+
 // Roles que pueden publicar posts (igual que User::canPublish()).
 export const ROLES_PUBLICAN = [ROLES.ADMIN, ROLES.EDITOR]

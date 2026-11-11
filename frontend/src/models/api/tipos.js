@@ -67,9 +67,9 @@
 
 /**
  * @typedef {{
- *   type: 'comment' | 'rating' | 'reply',
+ *   type: 'comment' | 'rating' | 'reply' | 'post_approved' | 'post_rejected' | 'role_changed',
  *   id: number,
- *   post_id: number,
+ *   post_id: number | null,
  *   post_title: string | null,
  *   author: string | null,
  *   content: string | null,
