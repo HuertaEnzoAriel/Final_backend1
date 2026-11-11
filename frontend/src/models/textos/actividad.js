@@ -14,10 +14,15 @@ export const ACTIVIDAD = {
   RESUMEN_COMENTARIOS: 'Comentarios',
   RESUMEN_CALIFICACIONES: 'Calificaciones',
   RESUMEN_PROMEDIO: 'Promedio',
+  APROBADO: 'Un administrador aprobó y publicó tu post',
+  RECHAZADO: 'Un administrador rechazó tu post',
+  MOTIVO: 'Motivo',
+  ROL_CAMBIADO: 'Un administrador cambió tu rol a',
   FILTROS: [
     { valor: 'all', texto: 'Todo' },
     { valor: 'comments', texto: 'Comentarios' },
     { valor: 'ratings', texto: 'Calificaciones' },
     { valor: 'replies', texto: 'Respuestas' },
+    { valor: 'notices', texto: 'Avisos' },
   ],
 }

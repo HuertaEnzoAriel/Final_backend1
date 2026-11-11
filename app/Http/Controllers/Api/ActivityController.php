@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Notice;
 use App\Models\Rating;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class ActivityController extends Controller
     public function index(Request $request): JsonResponse
     {
         $request->validate([
-            'type' => 'nullable|in:all,comments,ratings,replies',
+            'type' => 'nullable|in:all,comments,ratings,replies,notices',
             'post_id' => 'nullable|integer',
             'before' => 'nullable|date',
         ]);
@@ -126,6 +127,30 @@ class ActivityController extends Controller
             }
         }
 
+        // Avisos del sistema: post aprobado/rechazado y cambio de rol.
+        if (in_array($type, ['all', 'notices'], true)) {
+            $query = Notice::query()->where('user_id', $user->id);
+            if ($postId) {
+                $query->where('post_id', $postId);
+            }
+            if ($before) {
+                $query->where('created_at', '<', $before);
+            }
+            foreach ($query->latest()->limit($limit + 1)->get() as $n) {
+                $items->push([
+                    'type' => $n->kind,
+                    'id' => $n->id,
+                    'post_id' => $n->post_id,
+                    'post_title' => $n->title,
+                    'author' => null,
+                    'content' => $n->detail,
+                    'score' => null,
+                    'created_at' => $n->created_at->toISOString(),
+                    'is_new' => $seen === null || $n->created_at->gt($seen),
+                ]);
+            }
+        }
+
         $sorted = $items->sortByDesc('created_at')->values();
         $hasMore = $sorted->count() > $limit;
         $page = $sorted->take($limit)->values();
@@ -149,8 +174,13 @@ class ActivityController extends Controller
         $unreadReplies = (clone $replies)->when($seen, fn ($q) => $q->where('reply_at', '>', $seen))->count();
         $unreadRatings = (clone $ratings)->when($seen, fn ($q) => $q->where('updated_at', '>', $seen))->count();
 
+        $unreadNotices = Notice::query()
+            ->where('user_id', $user->id)
+            ->when($seen, fn ($q) => $q->where('created_at', '>', $seen))
+            ->count();
+
         return response()->json([
-            'unread' => $unreadComments + $unreadRatings + $unreadReplies,
+            'unread' => $unreadComments + $unreadRatings + $unreadReplies + $unreadNotices,
             'replies_total' => $replies->count(),
             'comments_total' => $comments->count(),
             'ratings_total' => $ratings->count(),
