@@ -29,10 +29,20 @@ class ActivityController extends Controller
             ->where('user_id', '!=', $me);
     }
 
+    /** Respuestas del dueño del post a comentarios del usuario autenticado. */
+    private function repliesQuery(int $me)
+    {
+        return Comment::query()
+            ->where('user_id', $me)
+            ->whereNotNull('reply')
+            ->whereNotNull('reply_at')
+            ->whereHas('post', fn ($q) => $q->where('user_id', '!=', $me));
+    }
+
     public function index(Request $request): JsonResponse
     {
         $request->validate([
-            'type' => 'nullable|in:all,comments,ratings',
+            'type' => 'nullable|in:all,comments,ratings,replies',
             'post_id' => 'nullable|integer',
             'before' => 'nullable|date',
         ]);
@@ -46,7 +56,7 @@ class ActivityController extends Controller
 
         $items = collect();
 
-        if ($type !== 'ratings') {
+        if (in_array($type, ['all', 'comments'], true)) {
             $query = $this->commentsQuery($user->id)->with('user:id,name', 'post:id,title');
             if ($postId) {
                 $query->where('post_id', $postId);
@@ -69,7 +79,7 @@ class ActivityController extends Controller
             }
         }
 
-        if ($type !== 'comments') {
+        if (in_array($type, ['all', 'ratings'], true)) {
             $query = $this->ratingsQuery($user->id)->with('user:id,name', 'post:id,title');
             if ($postId) {
                 $query->where('post_id', $postId);
@@ -88,6 +98,30 @@ class ActivityController extends Controller
                     'score' => $r->score,
                     'created_at' => $r->updated_at->toISOString(),
                     'is_new' => $seen === null || $r->updated_at->gt($seen),
+                ]);
+            }
+        }
+
+        if (in_array($type, ['all', 'replies'], true)) {
+            $query = $this->repliesQuery($user->id)->with('post:id,title,user_id', 'post.user:id,name');
+            if ($postId) {
+                $query->where('post_id', $postId);
+            }
+            if ($before) {
+                $query->where('reply_at', '<', $before);
+            }
+            foreach ($query->orderByDesc('reply_at')->limit($limit + 1)->get() as $c) {
+                $items->push([
+                    'type' => 'reply',
+                    'id' => $c->id,
+                    'post_id' => $c->post_id,
+                    'post_title' => $c->post?->title,
+                    'author' => $c->post?->user?->name,
+                    'content' => $c->reply,
+                    'original' => $c->content,
+                    'score' => null,
+                    'created_at' => $c->reply_at->toISOString(),
+                    'is_new' => $seen === null || $c->reply_at->gt($seen),
                 ]);
             }
         }
@@ -111,10 +145,13 @@ class ActivityController extends Controller
         $ratings = $this->ratingsQuery($user->id);
 
         $unreadComments = (clone $comments)->when($seen, fn ($q) => $q->where('created_at', '>', $seen))->count();
+        $replies = $this->repliesQuery($user->id);
+        $unreadReplies = (clone $replies)->when($seen, fn ($q) => $q->where('reply_at', '>', $seen))->count();
         $unreadRatings = (clone $ratings)->when($seen, fn ($q) => $q->where('updated_at', '>', $seen))->count();
 
         return response()->json([
-            'unread' => $unreadComments + $unreadRatings,
+            'unread' => $unreadComments + $unreadRatings + $unreadReplies,
+            'replies_total' => $replies->count(),
             'comments_total' => $comments->count(),
             'ratings_total' => $ratings->count(),
             'average' => round((float) $ratings->avg('score'), 1),

@@ -67,12 +67,13 @@
 
 /**
  * @typedef {{
- *   type: 'comment' | 'rating',
+ *   type: 'comment' | 'rating' | 'reply',
  *   id: number,
  *   post_id: number,
  *   post_title: string | null,
  *   author: string | null,
  *   content: string | null,
+ *   original?: string | null,
  *   score: number | null,
  *   created_at: string,
  *   is_new: boolean,
@@ -88,6 +89,7 @@
  *   unread: number,
  *   comments_total: number,
  *   ratings_total: number,
+ *   replies_total: number,
  *   average: number,
  * }} ResumenActividad
  */

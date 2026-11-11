@@ -36,6 +36,10 @@
   @apply line-clamp-3 text-texto;
 }
 
+.item-actividad__cita {
+  @apply line-clamp-2 border-l-2 border-borde pl-3 text-xs text-texto-suave;
+}
+
 .item-actividad__fecha {
   @apply text-xs text-texto-suave;
 }

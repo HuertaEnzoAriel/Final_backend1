@@ -75,7 +75,7 @@
 
 <EncabezadoSeccion titulo={ACTIVIDAD.TITULO} bajada={ACTIVIDAD.BAJADA} />
 
-{#if resumen}
+{#if resumen && (resumen.comments_total || resumen.ratings_total)}
   <dl class="actividad__resumen">
     <div class="actividad__dato">
       <dt>{ACTIVIDAD.RESUMEN_COMENTARIOS}</dt>

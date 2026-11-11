@@ -17,6 +17,8 @@
       <strong>{item.author ?? 'Alguien'}</strong>
       {#if item.type === 'comment'}
         {ACTIVIDAD.COMENTO}
+      {:else if item.type === 'reply'}
+        {ACTIVIDAD.RESPONDIO}
       {:else}
         {ACTIVIDAD.CALIFICO}
         <span class="item-actividad__estrellas" aria-label="{item.score} de 5">
@@ -27,8 +29,11 @@
       <em>{item.post_title ?? 'un artículo'}</em>
       {#if item.is_new}<span class="item-actividad__etiqueta">{ACTIVIDAD.NUEVO}</span>{/if}
     </p>
-    {#if item.type === 'comment'}
+    {#if item.type === 'comment' || item.type === 'reply'}
       <p class="item-actividad__texto">{item.content}</p>
+    {/if}
+    {#if item.type === 'reply' && item.original}
+      <p class="item-actividad__cita">{ACTIVIDAD.TU_COMENTARIO}: “{item.original}”</p>
     {/if}
     <time class="item-actividad__fecha" datetime={item.created_at}>{fecha}</time>
   </a>

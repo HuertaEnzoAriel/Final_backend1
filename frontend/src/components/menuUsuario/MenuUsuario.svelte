@@ -6,7 +6,6 @@
   import { salir } from '../../services/auth.js'
   import { ENLACES_CUENTA, puedeVer } from '../../models/navegacion/enlaces.js'
   import { RUTAS } from '../../models/rutas/rutas.js'
-  import { ROLES_PUBLICAN } from '../../models/roles/roles.js'
   import { actividad, refrescarNoVistos } from '../../state/actividad.svelte.js'
 
   let abierto = $state(false)
@@ -15,8 +14,9 @@
 
   let enlaces = $derived(ENLACES_CUENTA.filter((enlace) => puedeVer(enlace, sesion.usuario)))
 
-  // Solo quienes publican reciben actividad. Se consulta al entrar y al volver a la pestaña.
-  let recibeActividad = $derived(!!sesion.usuario && ROLES_PUBLICAN.includes(sesion.usuario.role))
+  // Cualquier usuario recibe actividad (reacciones a sus posts o respuestas a sus comentarios).
+  // Se consulta al entrar y al volver a la pestaña.
+  let recibeActividad = $derived(!!sesion.usuario)
   $effect(() => {
     if (recibeActividad) refrescarNoVistos()
     else actividad.noVistos = 0
