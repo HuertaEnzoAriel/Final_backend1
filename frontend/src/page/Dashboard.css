@@ -1,0 +1,65 @@
+@reference "../App.css";
+
+.dashboard__metricas {
+  @apply mb-6 grid grid-cols-2 gap-3 md:grid-cols-4;
+}
+
+.dashboard__dato {
+  @apply rounded-2xl border border-borde bg-superficie p-4 text-center;
+}
+
+.dashboard__dato dt {
+  @apply text-[10px] font-semibold tracking-[0.14em] text-texto-suave uppercase md:text-xs;
+}
+
+.dashboard__dato dd {
+  @apply mt-1 font-titulo text-2xl font-black text-acento md:text-3xl;
+}
+
+.dashboard__acciones {
+  @apply mb-6 flex flex-wrap items-center gap-3;
+}
+
+.dashboard__ayuda {
+  @apply text-sm text-texto-suave;
+}
+
+.dashboard__lista {
+  @apply flex flex-col gap-3;
+}
+
+.dashboard__post {
+  @apply flex flex-col gap-3 rounded-2xl border border-borde bg-superficie p-4 md:flex-row md:items-center md:justify-between md:p-5;
+}
+
+.dashboard__titulo {
+  @apply font-titulo text-lg font-bold text-texto;
+}
+
+.dashboard__meta {
+  @apply mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-texto-suave;
+}
+
+.dashboard__estado {
+  @apply rounded-full border border-borde px-2.5 py-0.5 text-[10px] font-bold tracking-[0.14em] uppercase;
+}
+
+.dashboard__estado--published {
+  @apply border-acento bg-acento text-sobre-acento;
+}
+
+.dashboard__estado--rejected {
+  @apply border-peligro text-peligro;
+}
+
+.dashboard__motivo {
+  @apply mt-2 rounded-lg border border-peligro/30 bg-peligro/5 px-3 py-2 text-sm text-texto;
+}
+
+.dashboard__botones {
+  @apply flex shrink-0 flex-wrap gap-2;
+}
+
+.dashboard__error {
+  @apply mb-4 text-sm text-peligro;
+}
