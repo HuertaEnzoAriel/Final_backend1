@@ -60,5 +60,13 @@ export function avisarActividad() {
 
   if (Date.now() - ultimoAviso < API_CONFIG.MS_ENTRE_AVISOS) return
   ultimoAviso = Date.now()
-  pedir(ENDPOINTS.USUARIO).catch(() => {})
+  // Si un admin le cambió el rol, la sesión del front se actualiza sola.
+  pedir(ENDPOINTS.USUARIO)
+    .then((usuario) => {
+      if (sesion.usuario && usuario?.role && usuario.role !== sesion.usuario.role) {
+        sesion.usuario.role = usuario.role
+        registrarActividad()
+      }
+    })
+    .catch(() => {})
 }
