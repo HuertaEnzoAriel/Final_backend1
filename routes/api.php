@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ModerationController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,10 @@ Route::post('/register', [AuthController::class, 'register']);
 // Requieren token.
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/me/posts', [PostController::class, 'mine']);
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->whereNumber('post');
+    Route::post('/me/editor-request', [PostController::class, 'requestEditor']);
     Route::post('/posts/{post}/comments', [PostController::class, 'comment']);
     Route::post('/posts/{post}/ratings', [PostController::class, 'rate']);
     Route::post('/comments/{comment}/reply', [PostController::class, 'reply'])->whereNumber('comment');
@@ -27,6 +32,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me/activity', [ActivityController::class, 'index']);
     Route::get('/me/activity/summary', [ActivityController::class, 'summary']);
     Route::post('/me/activity/seen', [ActivityController::class, 'seen']);
+});
+
+// Moderación (solo admin).
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+    Route::get('/users', [ModerationController::class, 'users']);
+    Route::post('/users/{user}/role', [ModerationController::class, 'updateRole'])->whereNumber('user');
+    Route::get('/posts/pending', [ModerationController::class, 'index']);
+    Route::post('/posts/{post}/approve', [ModerationController::class, 'approve'])->whereNumber('post');
+    Route::post('/posts/{post}/reject', [ModerationController::class, 'reject'])->whereNumber('post');
 });
 
 Route::get('/user', function (Request $request) {

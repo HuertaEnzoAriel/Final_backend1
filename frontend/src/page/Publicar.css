@@ -1,0 +1,13 @@
+@reference "../App.css";
+
+.publicar {
+  @apply mx-auto mt-6 flex max-w-2xl flex-col gap-5 rounded-3xl border border-borde bg-superficie p-6 md:p-8;
+}
+
+.publicar__contenido {
+  @apply min-h-48 resize-y;
+}
+
+.publicar__ayuda {
+  @apply text-xs text-texto-suave;
+}
