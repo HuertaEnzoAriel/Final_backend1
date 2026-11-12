@@ -9,10 +9,10 @@
   import { marcarVisto } from '../../state/actividad.svelte.js'
 
   let filtro = $state('all')
-  /** @type {import('../models/api/tipos.js').ResumenActividad | null} */
+  /** @type {import('../../models/api/tipos.js').ResumenActividad | null} */
   let resumen = $state(null)
   let estado = $state(
-    /** @type {{ items: import('../models/api/tipos.js').ItemActividad[], siguiente: string | null, cargando: boolean, cargandoMas: boolean, error: string | null }} */ ({
+    /** @type {{ items: import('../../models/api/tipos.js').ItemActividad[], siguiente: string | null, cargando: boolean, cargandoMas: boolean, error: string | null }} */ ({
       items: [],
       siguiente: null,
       cargando: true,

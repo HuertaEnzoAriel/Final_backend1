@@ -12,7 +12,7 @@
 
   // Los tres estados: cargando, error y datos (apunte §8.1 y §8.2).
   let estado = $state(
-    /** @type {{ datos: import('../models/api/tipos.js').RespuestaInicio | null, cargando: boolean, error: string | null }} */ ({
+    /** @type {{ datos: import('../../models/api/tipos.js').RespuestaInicio | null, cargando: boolean, error: string | null }} */ ({
       datos: null,
       cargando: true,
       error: null,
