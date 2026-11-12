@@ -1,14 +1,14 @@
 <script>
   import './Dashboard.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import Boton from '../components/boton/Boton.svelte'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS, conId } from '../models/api/endpoints.js'
-  import { RUTAS, rutaPost } from '../models/rutas/rutas.js'
-  import { ROLES_PUBLICAN } from '../models/roles/roles.js'
-  import { DASHBOARD } from '../models/textos/dashboard.js'
-  import { sesion } from '../state/sesion.svelte.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import Boton from '../../components/boton/Boton.svelte'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS, conId } from '../../models/api/endpoints.js'
+  import { RUTAS, rutaPost } from '../../models/rutas/rutas.js'
+  import { ROLES_PUBLICAN } from '../../models/roles/roles.js'
+  import { DASHBOARD } from '../../models/textos/dashboard.js'
+  import { sesion } from '../../state/sesion.svelte.js'
 
   // Solo con sesión: un invitado va al login.
   if (!sesion.usuario) window.location.hash = RUTAS.LOGIN

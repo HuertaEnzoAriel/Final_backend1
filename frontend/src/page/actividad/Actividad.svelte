@@ -1,12 +1,12 @@
 <script>
   import './Actividad.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import ItemActividad from '../components/itemActividad/ItemActividad.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS } from '../models/api/endpoints.js'
-  import { ACTIVIDAD } from '../models/textos/actividad.js'
-  import { marcarVisto } from '../state/actividad.svelte.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import ItemActividad from '../../components/itemActividad/ItemActividad.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS } from '../../models/api/endpoints.js'
+  import { ACTIVIDAD } from '../../models/textos/actividad.js'
+  import { marcarVisto } from '../../state/actividad.svelte.js'
 
   let filtro = $state('all')
   /** @type {import('../models/api/tipos.js').ResumenActividad | null} */

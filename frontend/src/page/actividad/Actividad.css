@@ -1,4 +1,4 @@
-@reference "../App.css";
+@reference "../../App.css";
 
 .actividad__resumen {
   @apply mb-6 grid grid-cols-3 gap-3;

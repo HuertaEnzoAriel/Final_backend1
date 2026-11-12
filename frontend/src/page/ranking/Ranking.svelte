@@ -1,10 +1,10 @@
 <script>
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import FilaRanking from '../components/filaRanking/FilaRanking.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS } from '../models/api/endpoints.js'
-  import { RANKING } from '../models/textos/ranking.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import FilaRanking from '../../components/filaRanking/FilaRanking.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS } from '../../models/api/endpoints.js'
+  import { RANKING } from '../../models/textos/ranking.js'
 
   // Los tres estados: cargando, error y datos (apunte §8.1 y §8.2).
   let estado = $state(

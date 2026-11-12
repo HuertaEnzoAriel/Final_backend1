@@ -1,4 +1,4 @@
-@reference "../App.css";
+@reference "../../App.css";
 
 .no-encontrado {
   @apply mx-auto flex max-w-xl flex-col items-center gap-4 rounded-3xl bg-superficie px-6 py-20 text-center;

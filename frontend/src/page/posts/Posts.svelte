@@ -1,14 +1,14 @@
 <script>
   import './Posts.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import Boton from '../components/boton/Boton.svelte'
-  import ImagenPost from '../components/imagenPost/ImagenPost.svelte'
-  import MetaPost from '../components/metaPost/MetaPost.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS, conId } from '../models/api/endpoints.js'
-  import { RUTAS } from '../models/rutas/rutas.js'
-  import { POST } from '../models/textos/post.js'
-  import { sesion } from '../state/sesion.svelte.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import Boton from '../../components/boton/Boton.svelte'
+  import ImagenPost from '../../components/imagenPost/ImagenPost.svelte'
+  import MetaPost from '../../components/metaPost/MetaPost.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS, conId } from '../../models/api/endpoints.js'
+  import { RUTAS } from '../../models/rutas/rutas.js'
+  import { POST } from '../../models/textos/post.js'
+  import { sesion } from '../../state/sesion.svelte.js'
 
   // El Router pasa los parámetros de la URL: #/posts/5 → { id: '5' }.
   /** @type {{ params: { id: string } }} */

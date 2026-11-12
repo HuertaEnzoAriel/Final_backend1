@@ -1,9 +1,9 @@
 <script>
   import './Acerca.css'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import { sesion } from '../state/sesion.svelte.js'
-  import { RUTAS } from '../models/rutas/rutas.js'
-  import { ACERCA } from '../models/textos/acerca.js'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import { sesion } from '../../state/sesion.svelte.js'
+  import { RUTAS } from '../../models/rutas/rutas.js'
+  import { ACERCA } from '../../models/textos/acerca.js'
 
   // Con sesión iniciada no tiene sentido invitar a crear cuenta.
   let enlaces = $derived(ACERCA.ENLACES.filter((enlace) => !sesion.usuario || enlace.ruta !== RUTAS.REGISTRO))

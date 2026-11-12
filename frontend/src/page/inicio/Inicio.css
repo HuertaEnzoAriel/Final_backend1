@@ -1,4 +1,4 @@
-@reference "../App.css";
+@reference "../../App.css";
 
 .inicio {
   @apply grid gap-12 lg:grid-cols-3;
