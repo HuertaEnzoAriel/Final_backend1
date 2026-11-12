@@ -3,7 +3,6 @@ import { RUTAS } from '../rutas/rutas.js'
 // Textos y enlaces de las páginas de login y registro.
 export const AUTH = {
   ERROR_GENERAL: 'No se pudo conectar con el servidor. Probá de nuevo.',
-  ENVIANDO: 'Enviando…',
   LOGIN: {
     TITULO: 'Entrar',
     BAJADA: 'Usá tu cuenta para comentar, calificar y publicar.',

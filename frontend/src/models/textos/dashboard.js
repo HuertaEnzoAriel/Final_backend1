@@ -14,7 +14,6 @@ export const DASHBOARD = {
   SOLICITAR: 'Solicitar ser editor',
   SOLICITADO: 'Solicitud enviada',
   AYUDA_SOLICITUD: 'Para publicar necesitás el rol de editor. Un administrador revisará tu solicitud.',
-  ENVIANDO: 'Enviando…',
   SIN_POSTS: 'Todavía no tenés publicaciones.',
   SIN_POSTS_PUBLICAR: 'Todavía no tenés publicaciones. Creá la primera desde "Nuevo post".',
   ESTADOS: {
@@ -26,6 +25,5 @@ export const DASHBOARD = {
   ABRIR: 'Abrir',
   ELIMINAR: 'Eliminar',
   CONFIRMAR_ELIMINAR: '¿Eliminar este post? Esta acción no se puede deshacer.',
-  ERROR_ACCION: 'No se pudo completar la acción. Probá de nuevo.',
   COLUMNAS: { TITULO: 'Título', ESTADO: 'Estado', COMENTARIOS: 'Comentarios', RATING: 'Rating' },
 }

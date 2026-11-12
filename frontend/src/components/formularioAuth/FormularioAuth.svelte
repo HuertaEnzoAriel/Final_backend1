@@ -2,7 +2,7 @@
   import './FormularioAuth.css'
   import Aviso from '../aviso/Aviso.svelte'
   import Boton from '../boton/Boton.svelte'
-  import { AUTH } from '../../models/textos/auth.js'
+  import { COMUN } from '../../models/textos/comun.js'
 
   // Molde común de login y registro: los campos llegan como children (apunte §5.3).
   /**
@@ -32,7 +32,7 @@
 
   <form class="form-auth__form" {onsubmit}>
     {@render children?.()}
-    <Boton type="submit" disabled={enviando}>{enviando ? AUTH.ENVIANDO : textoBoton}</Boton>
+    <Boton type="submit" disabled={enviando}>{enviando ? COMUN.ENVIANDO : textoBoton}</Boton>
   </form>
 
   <nav class="form-auth__pie">

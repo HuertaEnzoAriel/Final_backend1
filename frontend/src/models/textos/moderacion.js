@@ -9,9 +9,7 @@ export const MODERACION = {
   APROBAR: 'Aprobar',
   RECHAZAR: 'Rechazar',
   CONFIRMAR_RECHAZO: 'Confirmar rechazo',
-  CANCELAR: 'Cancelar',
   MOTIVO: 'Motivo del rechazo (máx. 500 caracteres)',
-  TITULO_USUARIOS: 'Usuarios y roles',
   BAJADA_USUARIOS: 'Cambiá el rol de un usuario. Quien lo recibe verá un aviso en su actividad.',
   CARGANDO_USUARIOS: 'Cargando usuarios…',
   ERROR_USUARIOS: 'No se pudieron cargar los usuarios.',
@@ -23,5 +21,4 @@ export const MODERACION = {
   SIN_USUARIOS: 'Ningún usuario coincide con la búsqueda.',
   SOLICITO: 'Pidió ser editor',
   TU_CUENTA: 'Vos',
-  ERROR_ACCION: 'No se pudo completar la acción. Probá de nuevo.',
 }

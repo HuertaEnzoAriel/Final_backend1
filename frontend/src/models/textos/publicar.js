@@ -9,5 +9,4 @@ export const PUBLICAR = {
   BOTON: 'Enviar a revisión',
   ENVIADO: 'Tu post fue enviado a revisión. Un administrador lo publicará pronto.',
   SIN_PERMISO: 'Solo editores y administradores pueden publicar.',
-  ENLACES: [{ texto: 'Volver al blog', ruta: '/' }],
 }

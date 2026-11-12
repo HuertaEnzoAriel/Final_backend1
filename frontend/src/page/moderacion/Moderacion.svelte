@@ -10,6 +10,7 @@
   import { RUTAS } from '../../models/rutas/rutas.js'
   import { ROLES, ETIQUETAS_ROL } from '../../models/roles/roles.js'
   import { MODERACION } from '../../models/textos/moderacion.js'
+  import { COMUN } from '../../models/textos/comun.js'
   import { sesion } from '../../state/sesion.svelte.js'
 
   // Solo admin: un invitado va al login.
@@ -54,7 +55,7 @@
     } catch (e) {
       const err = /** @type {{ message: string, errores?: Record<string, string[]> }} */ (e)
       errorEn = id
-      errorAccion = err.errores?.rejection_reason?.[0] ?? err.message ?? MODERACION.ERROR_ACCION
+      errorAccion = err.errores?.rejection_reason?.[0] ?? err.message ?? COMUN.ERROR_ACCION
     } finally {
       ocupado = null
     }
@@ -98,7 +99,7 @@
       usuario.role = rol
       usuario.requested_editor = false
     } catch (e) {
-      errorRol = { id: usuario.id, texto: /** @type {Error} */ (e).message || MODERACION.ERROR_ACCION }
+      errorRol = { id: usuario.id, texto: /** @type {Error} */ (e).message || COMUN.ERROR_ACCION }
       await cargarUsuarios()
     } finally {
       guardando = null
@@ -174,7 +175,7 @@
                 <Boton disabled={ocupado === post.id || !motivo.trim()} onclick={() => resolver(post.id, ENDPOINTS.RECHAZAR, { rejection_reason: motivo.trim() })}>
                   {MODERACION.CONFIRMAR_RECHAZO}
                 </Boton>
-                <Boton variante="secundario" onclick={() => (rechazando = null)}>{MODERACION.CANCELAR}</Boton>
+                <Boton variante="secundario" onclick={() => (rechazando = null)}>{COMUN.CANCELAR}</Boton>
               {:else}
                 <Boton disabled={ocupado === post.id} onclick={() => resolver(post.id, ENDPOINTS.APROBAR, null)}>{MODERACION.APROBAR}</Boton>
                 <Boton variante="secundario" disabled={ocupado === post.id} onclick={() => empezarRechazo(post.id)}>{MODERACION.RECHAZAR}</Boton>

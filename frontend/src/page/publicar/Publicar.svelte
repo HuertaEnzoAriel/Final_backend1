@@ -9,6 +9,7 @@
   import { RUTAS } from '../../models/rutas/rutas.js'
   import { ROLES_PUBLICAN } from '../../models/roles/roles.js'
   import { PUBLICAR } from '../../models/textos/publicar.js'
+  import { COMUN } from '../../models/textos/comun.js'
   import { AUTH } from '../../models/textos/auth.js'
   import { sesion } from '../../state/sesion.svelte.js'
 
@@ -88,6 +89,6 @@
       {#if errores.image}<p class="campo__error">{errores.image[0]}</p>{/if}
     </div>
 
-    <Boton type="submit" disabled={enviando}>{enviando ? AUTH.ENVIANDO : PUBLICAR.BOTON}</Boton>
+    <Boton type="submit" disabled={enviando}>{enviando ? COMUN.ENVIANDO : PUBLICAR.BOTON}</Boton>
   </form>
 {/if}

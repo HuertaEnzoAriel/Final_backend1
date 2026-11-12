@@ -8,6 +8,7 @@
   import { RUTAS, rutaPost } from '../../models/rutas/rutas.js'
   import { ROLES_PUBLICAN } from '../../models/roles/roles.js'
   import { DASHBOARD } from '../../models/textos/dashboard.js'
+  import { COMUN } from '../../models/textos/comun.js'
   import { sesion } from '../../state/sesion.svelte.js'
 
   // Solo con sesión: un invitado va al login.
@@ -44,7 +45,7 @@
       await pedir(ENDPOINTS.SOLICITAR_EDITOR, { metodo: 'POST' })
       if (estado.datos) estado.datos.requested_editor = true
     } catch (e) {
-      errorAccion = /** @type {Error} */ (e).message || DASHBOARD.ERROR_ACCION
+      errorAccion = /** @type {Error} */ (e).message || COMUN.ERROR_ACCION
     } finally {
       enviando = false
     }
@@ -60,7 +61,7 @@
       // Se recarga para que las métricas reflejen el post eliminado.
       estado.datos = await pedir(ENDPOINTS.MIS_POSTS)
     } catch (e) {
-      errorAccion = /** @type {Error} */ (e).message || DASHBOARD.ERROR_ACCION
+      errorAccion = /** @type {Error} */ (e).message || COMUN.ERROR_ACCION
     } finally {
       eliminando = null
     }
@@ -94,7 +95,7 @@
     {:else if estado.datos.requested_editor}
       <Boton variante="secundario" disabled>{DASHBOARD.SOLICITADO}</Boton>
     {:else}
-      <Boton disabled={enviando} onclick={solicitarEditor}>{enviando ? DASHBOARD.ENVIANDO : DASHBOARD.SOLICITAR}</Boton>
+      <Boton disabled={enviando} onclick={solicitarEditor}>{enviando ? COMUN.ENVIANDO : DASHBOARD.SOLICITAR}</Boton>
       <p class="dashboard__ayuda">{DASHBOARD.AYUDA_SOLICITUD}</p>
     {/if}
   </div>

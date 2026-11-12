@@ -8,6 +8,7 @@
   import { ENDPOINTS, conId } from '../../models/api/endpoints.js'
   import { RUTAS } from '../../models/rutas/rutas.js'
   import { POST } from '../../models/textos/post.js'
+  import { COMUN } from '../../models/textos/comun.js'
   import { sesion } from '../../state/sesion.svelte.js'
 
   // El Router pasa los parámetros de la URL: #/posts/5 → { id: '5' }.
@@ -212,7 +213,7 @@
           <p class="post__error">{errorComentario}</p>
         {/if}
         <div>
-          <Boton type="submit" disabled={enviando}>{enviando ? POST.ENVIANDO : POST.BOTON_COMENTAR}</Boton>
+          <Boton type="submit" disabled={enviando}>{enviando ? COMUN.ENVIANDO : POST.BOTON_COMENTAR}</Boton>
         </div>
       </form>
     {/if}
@@ -256,9 +257,9 @@
               {/if}
               <div class="post__comentario-acciones">
                 <Boton type="submit" disabled={enviandoRespuesta}>
-                  {enviandoRespuesta ? POST.ENVIANDO : POST.BOTON_RESPONDER}
+                  {enviandoRespuesta ? COMUN.ENVIANDO : POST.BOTON_RESPONDER}
                 </Boton>
-                <Boton variante="secundario" onclick={cerrarRespuesta}>{POST.CANCELAR}</Boton>
+                <Boton variante="secundario" onclick={cerrarRespuesta}>{COMUN.CANCELAR}</Boton>
               </div>
             </form>
           {/if}
