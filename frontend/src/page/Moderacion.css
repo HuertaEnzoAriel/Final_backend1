@@ -28,12 +28,52 @@
   @apply min-h-24 w-full resize-y rounded-lg border border-borde bg-fondo px-4 py-3 text-texto outline-none focus:border-acento focus:ring-2 focus:ring-acento/30;
 }
 
-.moderacion__subtitulo {
-  @apply mt-12 font-titulo text-3xl font-black text-texto;
+.moderacion__pestanas {
+  @apply mt-6 flex gap-2 border-b border-borde;
+}
+
+.moderacion__pestana {
+  @apply -mb-px flex cursor-pointer items-center gap-2 border-b-2 border-transparent px-4 py-3 font-semibold text-texto-suave hover:text-texto;
+}
+
+.moderacion__pestana--activa {
+  @apply border-acento text-texto;
+}
+
+.moderacion__contador {
+  @apply rounded-full bg-acento px-2 py-0.5 text-xs font-bold text-sobre-acento;
 }
 
 .moderacion__bajada {
-  @apply mt-2 text-texto-suave;
+  @apply mt-4 text-texto-suave;
+}
+
+.moderacion__herramientas {
+  @apply mt-4 flex flex-col gap-3;
+}
+
+.moderacion__buscar {
+  @apply w-full rounded-lg border border-borde bg-fondo px-4 py-2.5 text-texto outline-none focus:border-acento focus:ring-2 focus:ring-acento/30;
+}
+
+.moderacion__filtros {
+  @apply flex flex-wrap gap-2;
+}
+
+.moderacion__filtro {
+  @apply cursor-pointer rounded-full border border-borde px-3 py-1 text-sm text-texto-suave hover:text-texto;
+}
+
+.moderacion__filtro--activo {
+  @apply border-acento bg-acento text-sobre-acento hover:text-sobre-acento;
+}
+
+.moderacion__lista--compacta {
+  @apply mt-4 gap-2;
+}
+
+.moderacion__datos {
+  @apply min-w-0;
 }
 
 .moderacion__usuario {

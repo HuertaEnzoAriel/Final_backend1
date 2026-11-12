@@ -1,7 +1,7 @@
 // Textos fijos de la página de moderación.
 export const MODERACION = {
   TITULO: 'Moderación',
-  BAJADA: 'Posts pendientes de revisión. Aprobalos para publicarlos o rechazalos indicando el motivo.',
+  BAJADA: 'Revisá los posts pendientes y gestioná los roles de los usuarios.',
   CARGANDO: 'Cargando pendientes…',
   ERROR_CARGA: 'No se pudieron cargar los pendientes.',
   SIN_PENDIENTES: 'No hay posts pendientes. ¡Todo al día!',
@@ -15,6 +15,12 @@ export const MODERACION = {
   BAJADA_USUARIOS: 'Cambiá el rol de un usuario. Quien lo recibe verá un aviso en su actividad.',
   CARGANDO_USUARIOS: 'Cargando usuarios…',
   ERROR_USUARIOS: 'No se pudieron cargar los usuarios.',
+  PESTANA_POSTS: 'Posts pendientes',
+  PESTANA_USUARIOS: 'Usuarios y roles',
+  BUSCAR: 'Buscar por nombre o correo…',
+  FILTRO_TODOS: 'Todos',
+  FILTRO_SOLICITUDES: 'Piden ser editor',
+  SIN_USUARIOS: 'Ningún usuario coincide con la búsqueda.',
   SOLICITO: 'Pidió ser editor',
   TU_CUENTA: 'Vos',
   ERROR_ACCION: 'No se pudo completar la acción. Probá de nuevo.',
