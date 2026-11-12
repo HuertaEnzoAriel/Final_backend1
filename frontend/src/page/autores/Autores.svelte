@@ -1,11 +1,11 @@
 <script>
   import './Autores.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import TarjetaAutor from '../components/tarjetaAutor/TarjetaAutor.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS } from '../models/api/endpoints.js'
-  import { AUTORES } from '../models/textos/autores.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import TarjetaAutor from '../../components/tarjetaAutor/TarjetaAutor.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS } from '../../models/api/endpoints.js'
+  import { AUTORES } from '../../models/textos/autores.js'
 
   // Los tres estados: cargando, error y datos (apunte §8.1 y §8.2).
   let estado = $state(

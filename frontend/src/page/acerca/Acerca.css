@@ -1,4 +1,4 @@
-@reference "../App.css";
+@reference "../../App.css";
 
 .acerca {
   @apply mx-auto flex max-w-3xl flex-col gap-5;

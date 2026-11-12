@@ -1,10 +1,10 @@
 <script>
-  import FormularioAuth from '../components/formularioAuth/FormularioAuth.svelte'
-  import CampoTexto from '../components/campoTexto/CampoTexto.svelte'
-  import { entrar } from '../services/auth.js'
-  import { sesion } from '../state/sesion.svelte.js'
-  import { RUTAS } from '../models/rutas/rutas.js'
-  import { AUTH } from '../models/textos/auth.js'
+  import FormularioAuth from '../../components/formularioAuth/FormularioAuth.svelte'
+  import CampoTexto from '../../components/campoTexto/CampoTexto.svelte'
+  import { entrar } from '../../services/auth.js'
+  import { sesion } from '../../state/sesion.svelte.js'
+  import { RUTAS } from '../../models/rutas/rutas.js'
+  import { AUTH } from '../../models/textos/auth.js'
 
   // Solo para invitados: con sesión iniciada vuelve al inicio.
   if (sesion.usuario) window.location.hash = RUTAS.INICIO

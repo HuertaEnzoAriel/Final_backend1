@@ -1,16 +1,16 @@
 <script>
   import './Publicar.css'
-  import '../components/campoTexto/CampoTexto.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import Boton from '../components/boton/Boton.svelte'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS } from '../models/api/endpoints.js'
-  import { RUTAS } from '../models/rutas/rutas.js'
-  import { ROLES_PUBLICAN } from '../models/roles/roles.js'
-  import { PUBLICAR } from '../models/textos/publicar.js'
-  import { AUTH } from '../models/textos/auth.js'
-  import { sesion } from '../state/sesion.svelte.js'
+  import '../../components/campoTexto/CampoTexto.css'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import Boton from '../../components/boton/Boton.svelte'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS } from '../../models/api/endpoints.js'
+  import { RUTAS } from '../../models/rutas/rutas.js'
+  import { ROLES_PUBLICAN } from '../../models/roles/roles.js'
+  import { PUBLICAR } from '../../models/textos/publicar.js'
+  import { AUTH } from '../../models/textos/auth.js'
+  import { sesion } from '../../state/sesion.svelte.js'
 
   // Solo editores y admins: el resto vuelve al login o al inicio.
   if (!sesion.usuario) window.location.hash = RUTAS.LOGIN

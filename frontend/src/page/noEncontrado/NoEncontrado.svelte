@@ -1,6 +1,6 @@
 <script>
   import './NoEncontrado.css'
-  import { RUTAS } from '../models/rutas/rutas.js'
+  import { RUTAS } from '../../models/rutas/rutas.js'
 </script>
 
 <section class="no-encontrado">

@@ -1,14 +1,14 @@
 <script>
   import './Inicio.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import PostDestacado from '../components/postDestacado/PostDestacado.svelte'
-  import TarjetaPost from '../components/tarjetaPost/TarjetaPost.svelte'
-  import PanelAcceso from '../components/panelAcceso/PanelAcceso.svelte'
-  import PanelEstadisticas from '../components/panelEstadisticas/PanelEstadisticas.svelte'
-  import ListaTopPosts from '../components/listaTopPosts/ListaTopPosts.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS } from '../models/api/endpoints.js'
-  import { INICIO } from '../models/textos/inicio.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import PostDestacado from '../../components/postDestacado/PostDestacado.svelte'
+  import TarjetaPost from '../../components/tarjetaPost/TarjetaPost.svelte'
+  import PanelAcceso from '../../components/panelAcceso/PanelAcceso.svelte'
+  import PanelEstadisticas from '../../components/panelEstadisticas/PanelEstadisticas.svelte'
+  import ListaTopPosts from '../../components/listaTopPosts/ListaTopPosts.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS } from '../../models/api/endpoints.js'
+  import { INICIO } from '../../models/textos/inicio.js'
 
   // Los tres estados: cargando, error y datos (apunte §8.1 y §8.2).
   let estado = $state(

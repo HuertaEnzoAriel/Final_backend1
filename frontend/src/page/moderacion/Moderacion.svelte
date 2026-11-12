@@ -1,16 +1,16 @@
 <script>
   import './Moderacion.css'
-  import Aviso from '../components/aviso/Aviso.svelte'
-  import Boton from '../components/boton/Boton.svelte'
-  import EncabezadoSeccion from '../components/encabezadoSeccion/EncabezadoSeccion.svelte'
-  import ImagenPost from '../components/imagenPost/ImagenPost.svelte'
-  import MetaPost from '../components/metaPost/MetaPost.svelte'
-  import { pedir } from '../services/api.js'
-  import { ENDPOINTS, conId } from '../models/api/endpoints.js'
-  import { RUTAS } from '../models/rutas/rutas.js'
-  import { ROLES, ETIQUETAS_ROL } from '../models/roles/roles.js'
-  import { MODERACION } from '../models/textos/moderacion.js'
-  import { sesion } from '../state/sesion.svelte.js'
+  import Aviso from '../../components/aviso/Aviso.svelte'
+  import Boton from '../../components/boton/Boton.svelte'
+  import EncabezadoSeccion from '../../components/encabezadoSeccion/EncabezadoSeccion.svelte'
+  import ImagenPost from '../../components/imagenPost/ImagenPost.svelte'
+  import MetaPost from '../../components/metaPost/MetaPost.svelte'
+  import { pedir } from '../../services/api.js'
+  import { ENDPOINTS, conId } from '../../models/api/endpoints.js'
+  import { RUTAS } from '../../models/rutas/rutas.js'
+  import { ROLES, ETIQUETAS_ROL } from '../../models/roles/roles.js'
+  import { MODERACION } from '../../models/textos/moderacion.js'
+  import { sesion } from '../../state/sesion.svelte.js'
 
   // Solo admin: un invitado va al login.
   if (!sesion.usuario) window.location.hash = RUTAS.LOGIN

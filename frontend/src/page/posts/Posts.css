@@ -1,4 +1,4 @@
-@reference "../App.css";
+@reference "../../App.css";
 
 .post {
   @apply mx-auto flex max-w-3xl flex-col gap-4;
